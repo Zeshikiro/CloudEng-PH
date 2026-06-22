@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 
 interface LessonCardProps {
+  id?: string;
   icon: string;
   title: string;
   children: ReactNode;
@@ -10,7 +11,7 @@ interface LessonCardProps {
   delay?: number;
 }
 
-export default function LessonCard({ icon, title, children, gradient = 'from-blue-500/20 to-purple-500/20', delay = 0 }: LessonCardProps) {
+export default function LessonCard({ id, icon, title, children, gradient = 'from-blue-500/20 to-purple-500/20', delay = 0 }: LessonCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -42,6 +43,7 @@ export default function LessonCard({ icon, title, children, gradient = 'from-blu
 
   return (
     <div
+      id={id}
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
