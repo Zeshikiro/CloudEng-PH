@@ -38,6 +38,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const supabase = createClient();
 
+  const fetchProfile = async (userId: string) => {
+    try {
+      const { data } = await supabase
+        .from('user_profiles')
+        .select('id, display_name, avatar_url')
+        .eq('id', userId)
+        .single();
+
+      if (data) {
+        setProfile(data);
+      }
+    } catch {
+      // Profile fetch failed — might not exist yet
+    }
+  };
+
   useEffect(() => {
     // Get initial session
     const getSession = async () => {
@@ -77,22 +93,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => subscription.unsubscribe();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const fetchProfile = async (userId: string) => {
-    try {
-      const { data } = await supabase
-        .from('user_profiles')
-        .select('id, display_name, avatar_url')
-        .eq('id', userId)
-        .single();
-
-      if (data) {
-        setProfile(data);
-      }
-    } catch {
-      // Profile fetch failed — might not exist yet
-    }
-  };
 
   const signUp = async (email: string, password: string, displayName: string) => {
     const { error } = await supabase.auth.signUp({

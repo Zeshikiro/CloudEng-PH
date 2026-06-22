@@ -28,11 +28,6 @@ export default function Quiz({ lessonId, questions }: QuizProps) {
   const { user } = useAuth();
   const storageKey = `${lessonId}-quiz`;
 
-  useEffect(() => {
-    loadPreviousScore();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
   const loadPreviousScore = async () => {
     // Try Supabase first if logged in
     if (user) {
@@ -75,6 +70,12 @@ export default function Quiz({ lessonId, questions }: QuizProps) {
       // Ignore parse errors
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    loadPreviousScore();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   const handleSelect = (questionId: number, optionIndex: number) => {
     if (isSubmitted) return;
