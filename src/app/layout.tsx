@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import { AuthProvider } from "@/components/AuthProvider";
+import CloudBot from "@/components/CloudBot";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,7 +52,10 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          {children}
+          <CloudBot />
+        </AuthProvider>
       </body>
     </html>
   );
