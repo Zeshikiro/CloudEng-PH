@@ -58,7 +58,7 @@ const scenarios: Scenario[] = [
     difficulty: 'Easy',
     requiredServices: ['ec2', 'vpc'],
     hint: 'You need a server (EC2) and a network (VPC) to host a website!',
-    successMessage: 'Tama! 🎉 Ang basic website ay kailangan ng EC2 (server) at VPC (network)!',
+    successMessage: 'Correct! 🎉 A basic website needs an EC2 (server) and a VPC (network)!',
   },
   {
     id: 'scalable-app',
@@ -67,7 +67,7 @@ const scenarios: Scenario[] = [
     difficulty: 'Medium',
     requiredServices: ['ec2', 'vpc', 'elb', 's3', 'rds'],
     hint: 'Think about: servers, load balancing, storage for static files, and a database!',
-    successMessage: 'Nailed it! 🔥 Load Balancer distributes traffic, S3 serves static files, RDS stores data!',
+    successMessage: 'Nailed it! 🔥 A Load Balancer distributes traffic, S3 serves static files, and RDS stores data!',
   },
   {
     id: 'serverless-api',
@@ -76,7 +76,7 @@ const scenarios: Scenario[] = [
     difficulty: 'Hard',
     requiredServices: ['lambda', 'dynamodb', 'route53', 'cloudfront', 'iam'],
     hint: 'No EC2 needed! Think: Lambda for code, DynamoDB for data, CDN for speed, DNS for routing, IAM for security.',
-    successMessage: 'Cloud Architect ka na! 🏆 Serverless = Lambda + DynamoDB + CloudFront + Route53 + IAM!',
+    successMessage: 'You are a Cloud Architect! 🏆 Serverless = Lambda + DynamoDB + CloudFront + Route53 + IAM!',
   },
 ];
 
@@ -246,7 +246,7 @@ export default function PlaygroundContent() {
               }`}>
                 {result === 'success'
                   ? selectedScenario.successMessage
-                  : '❌ Hindi pa tama ang architecture mo. Check kung may kulang na services! Try mo i-click ang Hint button.'}
+                  : '❌ Your architecture is not quite right yet. Check if any services are missing! Try clicking the Hint button.'}
               </div>
             )}
 

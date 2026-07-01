@@ -8,7 +8,7 @@ import ParticleBackground from '@/components/ParticleBackground';
 import { useRouter } from 'next/navigation';
 
 // Admin emails that can access this page
-const ADMIN_EMAILS = ['zeshikiro@gmail.com'];
+const ADMIN_EMAILS = ['johnryannicolas43@gmail.com'];
 
 interface QuizItem {
   question: string;

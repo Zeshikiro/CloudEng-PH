@@ -56,7 +56,13 @@ export default function ProgressBar({ sections }: ProgressBarProps) {
         {/* Section dots */}
         <div className="flex items-center justify-between">
           {sections.map((sectionId, index) => {
-            const labels = ['Analogy', 'Problems', 'Big 3', 'Hindi Magic', 'Quiz'];
+            const labelMap: Record<string, string> = {
+              analogy: 'Analogy', problems: 'Problems', big3: 'Big 3', 'not-magic': 'Hindi Magic',
+              pizza: 'Pizza Analogy', iaas: 'IaaS', 'paas-saas': 'PaaS & SaaS', comparison: 'Comparison',
+              compute: 'Compute', storage: 'Storage', networking: 'Networking', together: 'Together',
+              quiz: 'Quiz',
+            };
+            const label = labelMap[sectionId] || sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
             const isActive = index === activeIndex;
             const isPast = index < activeIndex;
 
@@ -84,7 +90,7 @@ export default function ProgressBar({ sections }: ProgressBarProps) {
                       : 'text-slate-600 group-hover:text-slate-400'
                   }`}
                 >
-                  {labels[index] || sectionId}
+                  {label}
                 </span>
               </button>
             );

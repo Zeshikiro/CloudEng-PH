@@ -8,24 +8,25 @@ import LessonCard from '@/components/LessonCard';
 import Quiz from '@/components/Quiz';
 import type { QuizQuestion } from '@/components/Quiz';
 import Link from 'next/link';
+import DiscussionSection from '@/components/DiscussionSection';
 
 const quizQuestions: QuizQuestion[] = [
   {
     id: 1,
-    question: 'Ano ang tamang analogy para sa IaaS?',
+    question: 'What is the correct analogy for IaaS?',
     options: [
-      'Kumain sa restaurant — ready na lahat',
-      'Bumili ng pizza kit — konting effort lang',
-      'Gumawa ng pizza from scratch — ikaw lahat',
-      'Nag-order ng delivery — zero effort',
+      'Eating at a restaurant — everything is ready',
+      'Buying a pizza kit — just a little effort',
+      'Making a pizza from scratch — you do everything',
+      'Ordering delivery — zero effort',
     ],
     correctIndex: 2,
     explanation:
-      'IaaS = from scratch. Ikaw ang bahala sa lahat — OS, runtime, app, data. Provider ang nagbibigay lang ng raw infrastructure (servers, storage, network).',
+      'IaaS = from scratch. You handle everything — OS, runtime, app, data. The provider just gives you the raw infrastructure (servers, storage, network).',
   },
   {
     id: 2,
-    question: 'Alin sa mga ito ang example ng PaaS?',
+    question: 'Which of the following is an example of PaaS?',
     options: [
       'Gmail',
       'AWS EC2',
@@ -34,20 +35,20 @@ const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 2,
     explanation:
-      'Heroku is PaaS — push mo lang ang code mo, sila na bahala sa server, scaling, at infrastructure. EC2 is IaaS, Gmail is SaaS.',
+      'Heroku is PaaS — you just push your code, and they handle the server, scaling, and infrastructure. EC2 is IaaS, Gmail is SaaS.',
   },
   {
     id: 3,
-    question: 'Sa SaaS, ano ang kailangan mong i-manage?',
+    question: 'In SaaS, what do you need to manage?',
     options: [
-      'Servers at networking',
-      'Operating system at runtime',
-      'Application code at deployment',
-      'Wala — gagamitin mo na lang ang software',
+      'Servers and networking',
+      'Operating system and runtime',
+      'Application code and deployment',
+      'Nothing — you just use the software',
     ],
     correctIndex: 3,
     explanation:
-      'Sa SaaS, wala kang ini-manage. Ready-to-use na ang application. Gagamitin mo na lang siya through the browser or app. Zero maintenance sa part mo.',
+      'In SaaS, you manage nothing. The application is ready-to-use. You just use it through the browser or an app. Zero maintenance on your part.',
   },
 ];
 
@@ -83,15 +84,15 @@ export default function Lesson2Content() {
               <span className="text-gradient-primary">IaaS, PaaS, SaaS</span>
               <br />
               <span className="text-slate-400 text-2xl sm:text-3xl md:text-4xl font-medium">
-                Ano Ang Pinagkaiba?
+                What&apos;s the Difference?
               </span>
             </h1>
 
             {/* Description */}
             <p className="animate-fade-in-up delay-200 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8">
-              Sa lesson na &apos;to, tatalakayin natin ang tatlong <strong className="text-blue-400">Cloud Service Models</strong> —
-              IaaS, PaaS, at SaaS. Gamit ang pizza analogy, mauunawaan mo kung paano sila
-              nagkakaiba at kailan mo gagamitin ang bawat isa. 🍕☁️
+              In this lesson, we will discuss the three <strong className="text-blue-400">Cloud Service Models</strong> —
+              IaaS, PaaS, and SaaS. Using a pizza analogy, you&apos;ll understand how they 
+              differ and when you should use each one. 🍕☁️
             </p>
 
             {/* Meta info */}
@@ -106,13 +107,13 @@ export default function Lesson2Content() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
                 </svg>
-                4 na sections + quiz
+                4 sections + quiz
               </span>
               <span className="flex items-center gap-1.5">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
                 </svg>
-                Taglish
+                English
               </span>
             </div>
 
@@ -145,38 +146,38 @@ export default function Lesson2Content() {
                 delay={0}
               >
                 <p>
-                  Para mas madaling i-explain ang tatlong service models, gamitin natin ang <strong className="text-amber-300">pizza analogy</strong>.
-                  Isipin mo, may tatlong paraan para makakain ng pizza:
+                  To make the three service models easier to explain, let&apos;s use the <strong className="text-amber-300">pizza analogy</strong>.
+                  Imagine there are three ways to eat a pizza:
                 </p>
 
                 <div className="space-y-3 mt-2">
                   <div className="flex items-start gap-3 p-3 rounded-xl bg-blue-500/5 border border-blue-500/10">
                     <span className="text-2xl">🧱</span>
                     <div>
-                      <div className="font-bold text-blue-300 text-sm">IaaS = Gumawa ng Pizza from Scratch</div>
+                      <div className="font-bold text-blue-300 text-sm">IaaS = Making a Pizza from Scratch</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        Ikaw bibili ng ingredients, ikaw hahaluhaluin, ikaw maghahalo ng dough, ikaw maglalagay sa oven.
-                        <strong className="text-slate-300"> Full control ka pero ang daming kailangan gawin.</strong>
+                        You buy the ingredients, you mix the dough, you add the toppings, and you put it in the oven.
+                        <strong className="text-slate-300"> You have full control, but it takes a lot of work.</strong>
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-3 rounded-xl bg-purple-500/5 border border-purple-500/10">
                     <span className="text-2xl">🛠️</span>
                     <div>
-                      <div className="font-bold text-purple-300 text-sm">PaaS = Bumili ng Pizza Kit</div>
+                      <div className="font-bold text-purple-300 text-sm">PaaS = Buying a Pizza Kit</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        Pre-made dough + sauce na ang kasama. Lagyan mo lang ng toppings at ilagay sa oven.
-                        <strong className="text-slate-300"> Less hassle, mas focused ka sa toppings (a.k.a. your app).</strong>
+                        Pre-made dough and sauce are included. You just add your toppings and pop it in the oven.
+                        <strong className="text-slate-300"> Less hassle, so you can focus on the toppings (a.k.a. your app).</strong>
                       </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10">
                     <span className="text-2xl">📦</span>
                     <div>
-                      <div className="font-bold text-emerald-300 text-sm">SaaS = Nag-order sa Jollibee/Pizza Hut Delivery</div>
+                      <div className="font-bold text-emerald-300 text-sm">SaaS = Ordering Pizza Delivery</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        Kumain ka na lang. Zero effort. Hindi mo na kailangan magluto, maghugas, or mag-maintain ng kitchen.
-                        <strong className="text-slate-300"> Ready-to-eat na agad. 🍗</strong>
+                        You just eat. Zero effort. You don&apos;t need to cook, wash dishes, or maintain a kitchen.
+                        <strong className="text-slate-300"> It&apos;s ready to eat immediately. 🍕</strong>
                       </p>
                     </div>
                   </div>
@@ -195,7 +196,7 @@ export default function Lesson2Content() {
 
                 <div className="mt-4 p-3 rounded-xl bg-amber-500/5 border border-amber-500/10 text-amber-300/80 text-sm">
                   💡 <strong>TL;DR:</strong> The higher you go (IaaS → PaaS → SaaS), the less you manage but the less control you have.
-                  Parang trade-off: <strong>convenience vs. control</strong>.
+                  It&apos;s a trade-off: <strong>convenience vs. control</strong>.
                 </div>
               </LessonCard>
             </div>
@@ -209,13 +210,13 @@ export default function Lesson2Content() {
                 delay={100}
               >
                 <p>
-                  Sa IaaS, binibigyan ka ng cloud provider ng <strong className="text-blue-300">raw computing resources</strong> —
-                  virtual machines, storage, at networking. Parang nag-rent ka ng lupa at building —
-                  <strong className="text-indigo-300"> ikaw ang bahala kung anong itatayo mo.</strong>
+                  With IaaS, the cloud provider gives you <strong className="text-blue-300">raw computing resources</strong> —
+                  virtual machines, storage, and networking. It&apos;s like renting land and a building —
+                  <strong className="text-indigo-300">you decide what to build inside.</strong>
                 </p>
                 <p>
-                  Ikaw ang mag-i-install ng operating system, mag-setup ng environment, mag-deploy ng app.
-                  Full control ka, pero full responsibility din.
+                  You install the operating system, set up the environment, and deploy your app.
+                  You get full control, but you also have full responsibility.
                 </p>
 
                 {/* Examples */}
@@ -231,7 +232,7 @@ export default function Lesson2Content() {
                 {/* What YOU vs PROVIDER manages */}
                 <div className="grid sm:grid-cols-2 gap-3 mt-4">
                   <div className="p-3 rounded-xl bg-blue-500/5 border border-blue-500/10">
-                    <div className="font-semibold text-blue-300 text-sm mb-2">👤 IKAW ang nag-manage:</div>
+                    <div className="font-semibold text-blue-300 text-sm mb-2">👤 YOU manage:</div>
                     <ul className="space-y-1.5 text-xs text-slate-400">
                       <li className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-blue-400" />
@@ -243,7 +244,7 @@ export default function Lesson2Content() {
                       </li>
                       <li className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-blue-400" />
-                        <span><strong className="text-slate-300">Application</strong> — yung actual na app mo</span>
+                        <span><strong className="text-slate-300">Application</strong> — your actual app</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-blue-400" />
@@ -252,11 +253,11 @@ export default function Lesson2Content() {
                     </ul>
                   </div>
                   <div className="p-3 rounded-xl bg-indigo-500/5 border border-indigo-500/10">
-                    <div className="font-semibold text-indigo-300 text-sm mb-2">☁️ PROVIDER ang nag-manage:</div>
+                    <div className="font-semibold text-indigo-300 text-sm mb-2">☁️ PROVIDER manages:</div>
                     <ul className="space-y-1.5 text-xs text-slate-400">
                       <li className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-indigo-400" />
-                        <span><strong className="text-slate-300">Physical Servers</strong> — hardware sa data center</span>
+                        <span><strong className="text-slate-300">Physical Servers</strong> — hardware in the data center</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <span className="w-1 h-1 rounded-full bg-indigo-400" />
@@ -271,12 +272,12 @@ export default function Lesson2Content() {
                 </div>
 
                 <p className="mt-3">
-                  <strong className="text-white">Best for:</strong> System administrators, DevOps engineers, at companies na gusto ng <strong className="text-blue-300">full control</strong> sa kanilang infrastructure.
+                  <strong className="text-white">Best for:</strong> System administrators, DevOps engineers, and companies that want <strong className="text-blue-300">full control</strong> over their infrastructure.
                 </p>
 
                 <div className="mt-4 p-3 rounded-xl bg-blue-500/5 border border-blue-500/10 text-blue-300/80 text-sm">
-                  💡 <strong>Fun fact:</strong> AWS EC2 (Elastic Compute Cloud) ang pinakapopular na IaaS service sa buong mundo.
-                  Dito nag-start ang AWS journey ng karamihang cloud engineers!
+                  💡 <strong>Fun fact:</strong> AWS EC2 (Elastic Compute Cloud) is the most popular IaaS service in the world.
+                  This is where most cloud engineers start their AWS journey!
                 </div>
               </LessonCard>
             </div>
@@ -285,7 +286,7 @@ export default function Lesson2Content() {
             <div id="paas-saas">
               <LessonCard
                 icon="🛠️"
-                title="PaaS at SaaS: Less Hassle, More Focus"
+                title="PaaS and SaaS: Less Hassle, More Focus"
                 gradient="from-purple-500/20 to-pink-500/20"
                 delay={200}
               >
@@ -293,9 +294,9 @@ export default function Lesson2Content() {
                 <div className="p-4 rounded-xl bg-purple-500/5 border border-purple-500/10 mb-4">
                   <h4 className="font-bold text-purple-300 text-base mb-2">🛠️ PaaS — Platform as a Service</h4>
                   <p>
-                    Sa PaaS, <strong className="text-purple-300">deploy mo lang ang code mo</strong> — sila na bahala sa infrastructure.
-                    Hindi mo na kailangang mag-setup ng server, mag-install ng OS, or mag-configure ng networking.
-                    Focus ka lang sa pagbuo ng app mo.
+                    With PaaS, you <strong className="text-purple-300">just deploy your code</strong> — they handle the infrastructure.
+                    You don&apos;t need to set up servers, install an OS, or configure networking.
+                    You can just focus on building your app.
                   </p>
                   <div className="mt-3">
                     <div className="font-semibold text-white text-xs mb-1.5">Popular PaaS Examples:</div>
@@ -309,19 +310,19 @@ export default function Lesson2Content() {
                 </div>
 
                 <div className="p-3 rounded-xl bg-purple-500/5 border border-purple-500/10 text-purple-300/80 text-sm mb-4">
-                  🤯 <strong>Fun fact:</strong> Yung Next.js website na pinag-aaralan mo ngayon? Pag-deploy mo sa Vercel, <strong>PaaS na yun!</strong> Push
-                  mo lang sa GitHub, auto-deploy na. Walang server setup, walang sakit ng ulo. ✨
+                  🤯 <strong>Fun fact:</strong> This Next.js website you&apos;re using right now? By deploying it on Vercel, <strong>that&apos;s PaaS!</strong> You just push
+                  to GitHub, and it auto-deploys. No server setup, no headaches. ✨
                 </div>
 
                 {/* SaaS */}
                 <div className="p-4 rounded-xl bg-pink-500/5 border border-pink-500/10 mb-4">
                   <h4 className="font-bold text-pink-300 text-base mb-2">📦 SaaS — Software as a Service</h4>
                   <p>
-                    SaaS ang pinaka-simple. <strong className="text-pink-300">Ready-to-use na application</strong> siya na
-                    accessible through the browser or app. Hindi mo na kailangang mag-code or mag-maintain — gagamitin mo na lang.
+                    SaaS is the simplest. It is a <strong className="text-pink-300">ready-to-use application</strong> that is
+                    accessible through a browser or an app. You don&apos;t need to code or maintain it — you just use it.
                   </p>
                   <div className="mt-3">
-                    <div className="font-semibold text-white text-xs mb-1.5">SaaS na Ginagamit Mo Every Day:</div>
+                    <div className="font-semibold text-white text-xs mb-1.5">SaaS You Use Every Day:</div>
                     <div className="flex flex-wrap gap-2">
                       <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium">Gmail</span>
                       <span className="px-3 py-1 rounded-full bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-medium">Netflix</span>
@@ -333,8 +334,8 @@ export default function Lesson2Content() {
                 </div>
 
                 <div className="mt-4 p-3 rounded-xl bg-pink-500/5 border border-pink-500/10 text-pink-300/80 text-sm">
-                  💡 <strong>Alam mo ba?</strong> Most people use SaaS every day without knowing it! Pag nag-Gmail ka, nag-Netflix, or nag-Spotify
-                  — <strong>gumagamit ka na ng cloud.</strong> Hindi mo na kailangang mag-install ng software sa computer mo. 🎵
+                  💡 <strong>Did you know?</strong> Most people use SaaS every day without knowing it! Whenever you use Gmail, Netflix, or Spotify
+                  — <strong>you&apos;re already using the cloud.</strong> You don&apos;t need to install any heavy software on your computer. 🎵
                 </div>
               </LessonCard>
             </div>
@@ -348,8 +349,8 @@ export default function Lesson2Content() {
                 delay={300}
               >
                 <p>
-                  Para mas malinaw, tignan natin ang <strong className="text-emerald-300">side-by-side comparison</strong> ng
-                  tatlong service models:
+                  To make things clearer, let&apos;s take a look at a <strong className="text-emerald-300">side-by-side comparison</strong> of
+                  the three service models:
                 </p>
 
                 {/* Comparison Grid */}
@@ -365,17 +366,17 @@ export default function Lesson2Content() {
                   {/* Control */}
                   <div className="grid grid-cols-4 gap-2 text-xs">
                     <div className="p-2.5 rounded-lg bg-slate-800/50 text-slate-300 font-medium flex items-center">🎮 Control</div>
-                    <div className="p-2.5 rounded-lg bg-blue-500/5 border border-blue-500/10 text-blue-200 text-center">Pinakamataas</div>
+                    <div className="p-2.5 rounded-lg bg-blue-500/5 border border-blue-500/10 text-blue-200 text-center">Highest</div>
                     <div className="p-2.5 rounded-lg bg-purple-500/5 border border-purple-500/10 text-purple-200 text-center">Medium</div>
-                    <div className="p-2.5 rounded-lg bg-pink-500/5 border border-pink-500/10 text-pink-200 text-center">Pinakamababa</div>
+                    <div className="p-2.5 rounded-lg bg-pink-500/5 border border-pink-500/10 text-pink-200 text-center">Lowest</div>
                   </div>
 
                   {/* Complexity */}
                   <div className="grid grid-cols-4 gap-2 text-xs">
                     <div className="p-2.5 rounded-lg bg-slate-800/50 text-slate-300 font-medium flex items-center">🧩 Complexity</div>
-                    <div className="p-2.5 rounded-lg bg-blue-500/5 border border-blue-500/10 text-blue-200 text-center">Pinakamahirap</div>
+                    <div className="p-2.5 rounded-lg bg-blue-500/5 border border-blue-500/10 text-blue-200 text-center">Hardest</div>
                     <div className="p-2.5 rounded-lg bg-purple-500/5 border border-purple-500/10 text-purple-200 text-center">Medium</div>
-                    <div className="p-2.5 rounded-lg bg-pink-500/5 border border-pink-500/10 text-pink-200 text-center">Pinakamadali</div>
+                    <div className="p-2.5 rounded-lg bg-pink-500/5 border border-pink-500/10 text-pink-200 text-center">Easiest</div>
                   </div>
 
                   {/* Flexibility */}
@@ -404,9 +405,9 @@ export default function Lesson2Content() {
                 </div>
 
                 <div className="mt-5 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-emerald-300/80 text-sm">
-                  💡 <strong>Remember:</strong> Sa real world, companies use a <strong>MIX</strong> of all three. Hindi either/or.
-                  Pwedeng IaaS para sa backend servers, PaaS para sa quick deployments, at SaaS para sa email at collaboration tools.
-                  Ang mahalaga, alam mo kung <strong>kailan gagamitin ang bawat isa</strong>. 🎯
+                  💡 <strong>Remember:</strong> In the real world, companies use a <strong>MIX</strong> of all three. It&apos;s not an either/or situation.
+                  They might use IaaS for backend servers, PaaS for quick deployments, and SaaS for email and collaboration tools.
+                  What&apos;s important is knowing <strong>when to use each one</strong>. 🎯
                 </div>
               </LessonCard>
             </div>
@@ -428,14 +429,14 @@ export default function Lesson2Content() {
                   Ready for the next lesson?
                 </h3>
                 <p className="text-sm text-slate-400 mb-5 max-w-sm">
-                  Sa Lesson 3, mag-setup tayo ng actual <strong className="text-blue-400">AWS account</strong>.
-                  Hands-on na! Dito na talaga magsisimula ang cloud journey mo. 💪
+                  In Lesson 3, we will learn about <strong className="text-blue-400">Compute, Storage, and Networking</strong> —
+                  the Big 3 of cloud services. This is where your hands-on journey really begins. 💪
                 </p>
                 <Link
-                  href="#"
+                  href="/lesson-3"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold hover:from-blue-400 hover:to-purple-500 transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:-translate-y-0.5"
                 >
-                  Lesson 3: Coming Soon
+                  Lesson 3: Compute, Storage, Networking
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
@@ -446,15 +447,22 @@ export default function Lesson2Content() {
           </div>
         </section>
 
+        {/* Discussion */}
+        <section className="py-8 px-4">
+          <div className="max-w-3xl mx-auto">
+            <DiscussionSection lessonSlug="lesson-2" />
+          </div>
+        </section>
+
         {/* ================================================================
             FOOTER
             ================================================================ */}
         <footer className="border-t border-white/[0.04] py-8 px-4">
           <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
             <div className="flex items-center gap-2">
-              <span className="text-gradient-primary font-bold">CloudEng PH</span>
+              <span className="text-gradient-primary font-bold">CloudEng</span>
               <span>•</span>
-              <span>Made with ☁️ for aspiring Pinoy cloud engineers</span>
+              <span>Made with ☁️ for aspiring cloud engineers</span>
             </div>
             <div className="flex items-center gap-4">
               <span>© 2026</span>

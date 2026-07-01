@@ -6,7 +6,6 @@ import { createClient } from '@/lib/supabase/client';
 import Navbar from '@/components/Navbar';
 import ParticleBackground from '@/components/ParticleBackground';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 interface QuizScore {
@@ -130,9 +129,12 @@ export default function DashboardContent() {
             <div className="p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] shadow-2xl">
               <h2 className="text-2xl font-[family-name:var(--font-space-grotesk)] font-bold text-white mb-6">Achievements</h2>
               <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <Badge title="Cloud Curious" desc="Started first lesson" icon="🌤️" unlocked={totalQuizzes > 0} />
+                <Badge title="Cloud Curious" desc="Started first lesson" icon="☁️" unlocked={totalQuizzes > 0} />
                 <Badge title="Perfect Score" desc="100% on any quiz" icon="💯" unlocked={hasPerfectScore} />
                 <Badge title="Lab Explorer" desc="Completed first lab" icon="🧪" unlocked={labsCount > 0} />
+                <Badge title="Knowledge Seeker" desc="Completed all Module 1" icon="📚" unlocked={scores.filter(s => s.lesson_slug.includes('lesson-1') || s.lesson_slug.includes('lesson-2')).length >= 2} />
+                <Badge title="On Fire" desc="Completed 3+ quizzes" icon="🔥" unlocked={totalQuizzes >= 3} />
+                <Badge title="Cloud Champion" desc="All content done" icon="🏆" unlocked={totalQuizzes >= 3 && labsCount >= 2} />
               </div>
             </div>
 
@@ -156,6 +158,10 @@ export default function DashboardContent() {
                 <Link href="/leaderboard" className="block p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/[0.05] transition-colors">
                   <div className="font-medium text-purple-400">View Leaderboard 🏆</div>
                   <div className="text-sm text-slate-400">See global rankings</div>
+                </Link>
+                <Link href="/certificate" className="block p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/[0.05] transition-colors">
+                  <div className="font-medium text-amber-400">🎓 Certificate</div>
+                  <div className="text-sm text-slate-400">Download when eligible</div>
                 </Link>
               </div>
             </div>

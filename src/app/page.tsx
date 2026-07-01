@@ -10,8 +10,8 @@ const lessons = [
   {
     id: 1,
     slug: 'lesson-1',
-    title: 'Ano ba Cloud? Bakit di na PC sa bahay?',
-    description: 'Introduction sa Cloud Computing — analogy, problems solved, Big 3 providers, at bakit hindi ito magic.',
+    title: 'What is the Cloud? Why not a home PC?',
+    description: "Introduction to Cloud Computing — analogies, problems solved, Big 3 providers, and why it isn't magic.",
     module: 'Module 1 — Introduction',
     difficulty: 'Beginner',
     duration: '~10 min',
@@ -23,8 +23,8 @@ const lessons = [
   {
     id: 2,
     slug: 'lesson-2',
-    title: 'IaaS, PaaS, SaaS — Ano Ang Pinagkaiba?',
-    description: 'Alamin ang tatlong service models ng cloud at kung kailan dapat gamitin ang bawat isa.',
+    title: 'IaaS, PaaS, SaaS — What is the Difference?',
+    description: 'Learn the three cloud service models and when to use each one.',
     module: 'Module 1 — Introduction',
     difficulty: 'Beginner',
     duration: '~12 min',
@@ -37,7 +37,7 @@ const lessons = [
     id: 3,
     slug: 'labs/aws-setup',
     title: 'AWS Account Setup — Hands-on Lab!',
-    description: 'Step-by-step hands-on lab sa pag-gawa ng AWS Free Tier account at pag-navigate ng console.',
+    description: 'Step-by-step hands-on lab on creating an AWS Free Tier account and navigating the console.',
     module: 'Module 2 — Getting Started',
     difficulty: 'Beginner',
     duration: '~15 min',
@@ -50,7 +50,7 @@ const lessons = [
     id: 4,
     slug: 'lesson-3',
     title: 'Lesson 3: Compute, Storage, Networking',
-    description: 'Ang Big 3 ng Cloud Services — EC2, S3, at VPC. Alamin kung paano sila nag-wowork together.',
+    description: 'The Big 3 of Cloud Services — EC2, S3, and VPC. Learn how they work together.',
     module: 'Module 2 — Getting Started',
     difficulty: 'Beginner',
     duration: '~15 min',
@@ -62,14 +62,27 @@ const lessons = [
   {
     id: 5,
     slug: 'labs/ec2-launch',
-    title: 'EC2 — Paano Mag-launch ng Virtual Machine',
-    description: 'Hands-on lab: mag-launch ng EC2 instance, mag-SSH, at mag-deploy ng simple web app.',
+    title: 'EC2 — How to Launch a Virtual Machine',
+    description: 'Hands-on lab: launch an EC2 instance, use SSH, and deploy a simple web app.',
     module: 'Module 2 — Getting Started',
     difficulty: 'Intermediate',
     duration: '~20 min',
     sections: 7,
     icon: '🖥️',
     gradient: 'from-emerald-500 to-teal-500',
+    available: true,
+  },
+  {
+    id: 6,
+    slug: 'labs/s3-hosting',
+    title: 'S3 — Host a Static Website',
+    description: 'Hands-on lab: Host a static website using AWS S3 — no servers needed!',
+    module: 'Module 2 — Getting Started',
+    difficulty: 'Beginner',
+    duration: '~20 min',
+    sections: 6,
+    icon: '🌐',
+    gradient: 'from-cyan-500 to-blue-500',
     available: true,
   },
 ];
@@ -94,7 +107,7 @@ export default function HomePage() {
             <div className={`transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Free &amp; Open — Para sa Lahat ng Pinoy
+                Free &amp; Open — For Everyone
               </span>
             </div>
 
@@ -104,17 +117,17 @@ export default function HomePage() {
               <span className="text-gradient-primary">Cloud Engineering</span>
               <br />
               <span className="text-slate-400 text-2xl sm:text-3xl md:text-4xl font-medium">
-                sa Taglish. For free. 🇵🇭
+                in simple English. For free. 🇵🇭
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className={`mt-6 text-base sm:text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed transition-all duration-700 delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-              Interactive lessons, quizzes, at hands-on labs para matuto ka ng{' '}
+              Interactive lessons, quizzes, and hands-on labs to help you learn{' '}
               <strong className="text-blue-400">AWS</strong>,{' '}
-              <strong className="text-purple-400">Azure</strong>, at{' '}
+              <strong className="text-purple-400">Azure</strong>, and{' '}
               <strong className="text-emerald-400">GCP</strong> — 
-              kahit zero experience ka pa. Designed para sa Pinoy learners. 🚀
+              even with zero experience. Designed for Filipino learners. 🚀
             </p>
 
             {/* CTA Buttons */}
@@ -130,18 +143,18 @@ export default function HomePage() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </Link>
               <span className="text-sm text-slate-500">
-                4 lessons available • More coming soon
+                6 lessons & labs available • More coming soon
               </span>
             </div>
 
             {/* Stats */}
             <div className={`mt-16 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto transition-all duration-700 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">4</div>
-                <div className="text-xs text-slate-500 mt-1">Lessons</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">6</div>
+                <div className="text-xs text-slate-500 mt-1">Lessons & Labs</div>
               </div>
               <div className="text-center border-x border-white/[0.06]">
-                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">12</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">15+</div>
                 <div className="text-xs text-slate-500 mt-1">Quiz Questions</div>
               </div>
               <div className="text-center">
@@ -161,19 +174,19 @@ export default function HomePage() {
               <FeatureCard
                 icon="📖"
                 title="Interactive Lessons"
-                desc="Card-based lessons na easy ma-digest. Short paragraphs, analogies, at real-world examples. Hindi boring textbook style."
+                desc="Card-based lessons that are easy to digest. Short paragraphs, analogies, and real-world examples. Not a boring textbook style."
                 color="blue"
               />
               <FeatureCard
                 icon="🧠"
                 title="Quizzes per Lesson"
-                desc="Test your knowledge agad after each lesson. Progress mo naka-save sa browser — babalikan mo kung saan ka nag-stop."
+                desc="Test your knowledge right after each lesson. Your progress is saved in your browser — pick up exactly where you left off."
                 color="purple"
               />
               <FeatureCard
                 icon="⚡"
                 title="Hands-on Labs"
-                desc="Hindi lang theory — may actual na lab exercises using real AWS services. Free tier lang gamit natin."
+                desc="Not just theory — includes actual lab exercises using real AWS services. We only use the free tier."
                 color="emerald"
               />
             </div>
@@ -190,7 +203,7 @@ export default function HomePage() {
                 Course Roadmap
               </h2>
               <p className="text-slate-500 text-sm mt-2">
-                Sundan mo lang ang lessons in order — from zero to cloud engineer.
+                Just follow the lessons in order — from zero to cloud engineer.
               </p>
             </div>
 
@@ -227,7 +240,7 @@ export default function HomePage() {
             <div className="flex items-center gap-2">
               <span className="text-gradient-primary font-bold">CloudEng PH</span>
               <span>•</span>
-              <span>Made with ☁️ for aspiring Pinoy cloud engineers</span>
+              <span>Made with ☁️ for aspiring Filipino cloud engineers</span>
             </div>
             <div>© 2026</div>
           </div>

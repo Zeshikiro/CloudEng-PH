@@ -6,45 +6,46 @@ import ParticleBackground from '@/components/ParticleBackground';
 import ProgressBar from '@/components/ProgressBar';
 import LessonCard from '@/components/LessonCard';
 import Quiz from '@/components/Quiz';
+import DiscussionSection from '@/components/DiscussionSection';
 import type { QuizQuestion } from '@/components/Quiz';
 import Link from 'next/link';
 
 const quizQuestions: QuizQuestion[] = [
   {
     id: 1,
-    question: 'Ano ang primary purpose ng EC2 sa AWS?',
+    question: 'What is the primary purpose of EC2 in AWS?',
     options: [
-      'Mag-store ng files at images',
-      'Mag-run ng virtual machines at applications',
-      'Mag-manage ng domain names',
-      'Mag-send ng emails'
+      'To store files and images',
+      'To run virtual machines and applications',
+      'To manage domain names',
+      'To send emails'
     ],
     correctIndex: 1,
-    explanation: 'EC2 = Elastic Compute Cloud. Ito ang compute service ng AWS — nagbi-bigay sayo ng virtual machines para mag-run ng applications, process data, at iba pa.'
+    explanation: 'EC2 = Elastic Compute Cloud. This is the compute service of AWS — it gives you virtual machines to run applications, process data, and more.'
   },
   {
     id: 2,
-    question: 'Ano ang S3 bucket?',
+    question: 'What is an S3 bucket?',
     options: [
-      'Isang virtual machine na naka-deploy sa cloud',
-      'Isang container para sa storing objects (files) sa AWS',
-      'Isang networking tool para sa VPC',
-      'Isang monitoring dashboard'
+      'A virtual machine deployed in the cloud',
+      'A container for storing objects (files) in AWS',
+      'A networking tool for your VPC',
+      'A monitoring dashboard'
     ],
     correctIndex: 1,
-    explanation: 'S3 bucket = container para sa objects (files). Globally unique ang pangalan niya, at pwede kang mag-store ng unlimited na data dito.'
+    explanation: 'S3 bucket = a container for objects (files). Its name is globally unique, and you can store an unlimited amount of data in it.'
   },
   {
     id: 3,
-    question: 'Bakit importante ang VPC (Virtual Private Cloud)?',
+    question: 'Why is a VPC (Virtual Private Cloud) important?',
     options: [
-      'Para mas mabilis ang internet connection',
-      'Para libre ang lahat ng AWS services',
-      'Para ma-isolate at ma-secure ang cloud resources mo sa sarili mong private network',
-      'Para automatic ang backup ng files'
+      'To make your internet connection faster',
+      'To make all AWS services free',
+      'To isolate and secure your cloud resources in your own private network',
+      'To automatically back up files'
     ],
     correctIndex: 2,
-    explanation: 'VPC = your own private, isolated network sa AWS. Dito mo kino-control kung sino ang may access sa resources mo at paano sila nag-cocommunicate.'
+    explanation: 'VPC = your own private, isolated network in AWS. Here you control who has access to your resources and how they communicate with each other.'
   }
 ];
 
@@ -74,7 +75,7 @@ export default function Lesson3Content() {
             Lesson 3: Compute, Storage, Networking
           </h1>
           <p className="text-xl text-slate-400 mb-8 max-w-2xl mx-auto">
-            Ang Big 3 ng Cloud Services
+            The Big 3 of Cloud Services
           </p>
 
           <div className="flex items-center justify-center gap-6 text-sm text-slate-400 mb-12">
@@ -85,7 +86,7 @@ export default function Lesson3Content() {
               <span>📚</span> 4 sections + quiz
             </div>
             <div className="flex items-center gap-2">
-              <span>🇵🇭</span> Taglish
+              <span>🌍</span> English
             </div>
           </div>
 
@@ -103,30 +104,30 @@ export default function Lesson3Content() {
 
         <div className="max-w-3xl mx-auto space-y-12">
           <p className="text-lg text-slate-300 leading-relaxed text-center mb-16">
-            Sa lesson na ito, aalamin natin ang tatlong pinaka-fundamental na services sa cloud. Lahat ng iba pang services ay built on top ng tatlong ito. Kung master mo ito, you are halfway there.
+            In this lesson, we will learn about the three most fundamental services in the cloud. All other services are built on top of these three. If you master these, you&apos;re halfway there.
           </p>
 
           <LessonCard 
             id="compute"
             icon="🖥️"
-            title="Compute — Ang Utak ng Cloud"
+            title="Compute — The Brain of the Cloud"
             gradient="from-blue-500/20 to-indigo-500/20"
           >
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p>
-                <strong>Compute = processing power.</strong> Ito yung nagru-run ng code mo, nag-process ng data, at nag-eexecute ng applications. Parang ang Compute ay ang BRAIN ng operation mo sa cloud.
+                <strong>Compute = processing power.</strong> This is what runs your code, processes data, and executes applications. Think of Compute as the BRAIN of your cloud operations.
               </p>
               
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05] italic">
-                💡 <strong>Real-world analogy:</strong> Pag nag-order ka ng food delivery, ang Compute ay yung kitchen na nagluluto ng pagkain.
+                💡 <strong>Real-world analogy:</strong> When you order food delivery, the Compute is the kitchen cooking the food.
               </div>
 
               <div className="space-y-4 mt-8">
                 <h3 className="text-xl font-bold text-white">AWS EC2 (Elastic Compute Cloud)</h3>
-                <p>Ito ang pinakasikat na compute service. Virtual Machine siya na pwede mong i-configure: piliin ang OS, RAM, CPU, at storage.</p>
+                <p>This is the most popular compute service. It is a Virtual Machine that you can configure: choose the OS, RAM, CPU, and storage.</p>
                 <ul className="list-disc pl-5 space-y-2 text-slate-400">
-                  <li><strong>Instance types:</strong> May t2.micro (free tier!), t3.medium, m5.large, etc.</li>
-                  <li>Parang nag-rent ka ng computer sa cloud — ikaw bahala kung anong i-install.</li>
+                  <li><strong>Instance types:</strong> There&apos;s t2.micro (free tier!), t3.medium, m5.large, etc.</li>
+                  <li>It&apos;s like renting a computer in the cloud — you decide what to install.</li>
                   <li><strong className="text-blue-400">Fun fact:</strong> Netflix uses thousands of EC2 instances to stream to 200M+ users worldwide!</li>
                 </ul>
               </div>
@@ -134,13 +135,13 @@ export default function Lesson3Content() {
               <div className="space-y-4 mt-8">
                 <h3 className="text-xl font-bold text-white">Other Compute Services</h3>
                 <ul className="list-disc pl-5 space-y-2 text-slate-400">
-                  <li><strong>AWS Lambda:</strong> Serverless! Walang server na ini-manage. Run code on demand. Pay per execution.</li>
-                  <li><strong>ECS/EKS:</strong> Para sa containers (Docker/Kubernetes).</li>
+                  <li><strong>AWS Lambda:</strong> Serverless! No server to manage. Run code on demand. Pay per execution.</li>
+                  <li><strong>ECS/EKS:</strong> For containers (Docker/Kubernetes).</li>
                 </ul>
               </div>
 
               <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20">
-                <p className="text-blue-200"><strong>Tip:</strong> Start with EC2 para maintindihan mo ang basics. Move to Lambda pag comfortable ka na sa server concepts.</p>
+                <p className="text-blue-200"><strong>Tip:</strong> Start with EC2 so you understand the basics. Move to Lambda once you are comfortable with server concepts.</p>
               </div>
             </div>
           </LessonCard>
@@ -148,35 +149,35 @@ export default function Lesson3Content() {
           <LessonCard 
             id="storage"
             icon="📦"
-            title="Storage — Ang Filing Cabinet ng Cloud"
+            title="Storage — The Filing Cabinet of the Cloud"
             gradient="from-emerald-500/20 to-teal-500/20"
           >
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p>
-                <strong>Storage = where you keep your data.</strong> Files, images, videos, databases, backups — lahat nandito.
+                <strong>Storage = where you keep your data.</strong> Files, images, videos, databases, backups — everything goes here.
               </p>
               
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05] italic">
-                💡 <strong>Real-world analogy:</strong> Kung Compute ang kitchen, Storage ang refrigerator at pantry — doon naka-store lahat ng ingredients.
+                💡 <strong>Real-world analogy:</strong> If Compute is the kitchen, Storage is the refrigerator and pantry — where all the ingredients are stored.
               </div>
 
               <div className="space-y-4 mt-8">
                 <h3 className="text-xl font-bold text-white">AWS S3 (Simple Storage Service)</h3>
                 <ul className="list-disc pl-5 space-y-2 text-slate-400">
-                  <li><strong>Object storage:</strong> lagay mo lang ang file, bibigyan ka ng URL para ma-access.</li>
-                  <li><strong>Buckets:</strong> parang folders pero globally unique ang pangalan.</li>
-                  <li><strong>Use cases:</strong> Website hosting, backup, media files, data lake.</li>
+                  <li><strong>Object storage:</strong> just drop your file, and you get a URL to access it.</li>
+                  <li><strong>Buckets:</strong> like folders but with globally unique names.</li>
+                  <li><strong>Use cases:</strong> Website hosting, backups, media files, data lakes.</li>
                   <li>Free tier: 5GB for 12 months!</li>
                 </ul>
               </div>
 
               <div className="space-y-4 mt-8">
                 <h3 className="text-xl font-bold text-white">EBS (Elastic Block Store)</h3>
-                <p>Ito naman ang hard drive ng EC2 instance mo. Attached directly sa virtual machine. Parang external hard drive pero sa cloud.</p>
+                <p>This is the hard drive for your EC2 instance. It&apos;s attached directly to the virtual machine. Like an external hard drive, but in the cloud.</p>
               </div>
 
               <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                <p className="text-emerald-200"><strong>Tip:</strong> S3 is one of the most important services to master. Halos lahat ng AWS services ay gumagamit ng S3 in the background.</p>
+                <p className="text-emerald-200"><strong>Tip:</strong> S3 is one of the most important services to master. Almost all AWS services use S3 in the background.</p>
               </div>
             </div>
           </LessonCard>
@@ -184,24 +185,24 @@ export default function Lesson3Content() {
           <LessonCard 
             id="networking"
             icon="🌐"
-            title="Networking — Ang Kalsada ng Cloud"
+            title="Networking — The Roads of the Cloud"
             gradient="from-purple-500/20 to-pink-500/20"
           >
             <div className="space-y-6 text-slate-300 leading-relaxed">
               <p>
-                <strong>Networking = communication.</strong> Ito ang nagdedetermine kung paano mag-cocommunicate ang cloud resources mo sa isa&apos;t isa at sa internet.
+                <strong>Networking = communication.</strong> This determines how your cloud resources communicate with each other and the internet.
               </p>
               
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/[0.05] italic">
-                💡 <strong>Real-world analogy:</strong> Kung Compute ang building at Storage ang warehouse, Networking ang mga kalsada, highway, at toll gates na nag-coconnect sa kanila.
+                💡 <strong>Real-world analogy:</strong> If Compute is a building and Storage is a warehouse, Networking is the roads, highways, and toll gates connecting them.
               </div>
 
               <div className="space-y-4 mt-8">
                 <h3 className="text-xl font-bold text-white">VPC (Virtual Private Cloud)</h3>
-                <p>Ito ang your own private network sa cloud. Parang gumawa ka ng sarili mong invisible na building sa loob ng AWS.</p>
+                <p>This is your own private network in the cloud. It&apos;s like building your own invisible facility inside AWS.</p>
                 <ul className="list-disc pl-5 space-y-2 text-slate-400">
-                  <li><strong>Subnets:</strong> rooms inside your building. (Public subnet = may window sa labas, Private subnet = walang access sa internet).</li>
-                  <li><strong>Security Groups:</strong> parang bouncer o security guard — sino pwede pumasok, sino hindi.</li>
+                  <li><strong>Subnets:</strong> rooms inside your building. (Public subnet = has a window to the outside, Private subnet = no internet access).</li>
+                  <li><strong>Security Groups:</strong> like a bouncer or security guard — controlling who can enter and who cannot.</li>
                 </ul>
               </div>
 
@@ -209,12 +210,12 @@ export default function Lesson3Content() {
                 <h3 className="text-xl font-bold text-white">Other Networking Services</h3>
                 <ul className="list-disc pl-5 space-y-2 text-slate-400">
                   <li><strong>Route 53:</strong> AWS DNS service. Converts domain names (like cloudeng.ph) to IP addresses. (Named after Route 66 + DNS port 53).</li>
-                  <li><strong>CloudFront:</strong> CDN (Content Delivery Network). Gagawa ng copies ng website mo sa buong mundo para mabilis ma-access. (Para sa Pinas, madalas nasa Singapore ang edge location!).</li>
+                  <li><strong>CloudFront:</strong> CDN (Content Delivery Network). Makes copies of your website all over the world for faster access.</li>
                 </ul>
               </div>
 
               <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
-                <p className="text-purple-200"><strong>Tip:</strong> Networking is often ang pinaka-intimidating pero pinaka-important na concept for security. Take your time dito.</p>
+                <p className="text-purple-200"><strong>Tip:</strong> Networking is often the most intimidating but also the most important concept for security. Take your time here.</p>
               </div>
             </div>
           </LessonCard>
@@ -222,11 +223,11 @@ export default function Lesson3Content() {
           <LessonCard 
             id="together"
             icon="🔗"
-            title="Paano Sila Nag-wowork Together"
+            title="How They Work Together"
             gradient="from-amber-500/20 to-orange-500/20"
           >
             <div className="space-y-6 text-slate-300 leading-relaxed">
-              <p>Real-world example: <strong>Pag nag-open ka ng Netflix...</strong></p>
+              <p>Real-world example: <strong>When you open Netflix...</strong></p>
               
               <div className="relative p-6 rounded-2xl bg-black/40 border border-white/10 font-mono text-sm space-y-4 my-8">
                 <div className="flex items-center gap-4">
@@ -251,7 +252,7 @@ export default function Lesson3Content() {
               </div>
 
               <p className="text-lg text-white font-medium text-center mt-8">
-                Hindi mo kailangang ma-master lahat agad. Ang importante ay naintindihan mo kung PAANO sila connected. Sa mga susunod na lessons at labs, isa-isa nating tatackle.
+                You don&apos;t need to master everything right away. What&apos;s important is you understand HOW they connect. We will tackle them one by one in the next lessons and labs.
               </p>
             </div>
           </LessonCard>
@@ -277,7 +278,7 @@ export default function Lesson3Content() {
                     Ready for hands-on?
                   </h3>
                   <p className="text-slate-400 max-w-lg mb-8">
-                    Sa Lab 2, mag-launch tayo ng actual na EC2 instance! Gagawa tayo ng sarili mong virtual machine sa cloud na live sa internet.
+                    In Lab 2, we will launch an actual EC2 instance! We will create your own virtual machine in the cloud that&apos;s live on the internet.
                   </p>
                   <div className="px-8 py-4 rounded-xl bg-white text-slate-900 font-bold hover:scale-105 transition-transform duration-200">
                     Start Lab 2: Launch EC2 →
@@ -287,10 +288,15 @@ export default function Lesson3Content() {
             </Link>
           </div>
 
+          {/* Discussion */}
+          <div className="mt-16">
+            <DiscussionSection lessonSlug="lesson-3" />
+          </div>
+
           {/* Footer */}
           <footer className="mt-24 text-center pb-8 border-t border-white/[0.05] pt-8">
             <p className="text-slate-500 text-sm">
-              © 2026 CloudEng PH. Built for Filipino Cloud Engineers.
+              © 2026 CloudEng. Built for Cloud Engineers.
             </p>
           </footer>
         </div>

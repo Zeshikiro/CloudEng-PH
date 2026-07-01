@@ -8,24 +8,25 @@ import LessonCard from '@/components/LessonCard';
 import Quiz from '@/components/Quiz';
 import type { QuizQuestion } from '@/components/Quiz';
 import Link from 'next/link';
+import DiscussionSection from '@/components/DiscussionSection';
 
 const quizQuestions: QuizQuestion[] = [
   {
     id: 1,
-    question: 'Ano ang pinaka-simple na explanation ng Cloud Computing?',
+    question: 'What is the simplest explanation of Cloud Computing?',
     options: [
-      'Literal na cloud sa sky na may computers',
-      'Pag-rent ng computing resources sa internet instead na bumili ng sarili mong server',
-      'Isang programming language para sa websites',
-      'WiFi connection na walang cable',
+      'A literal cloud in the sky with computers',
+      'Renting computing resources over the internet instead of buying your own server',
+      'A programming language for websites',
+      'A WiFi connection without cables',
     ],
     correctIndex: 1,
     explanation:
-      'Cloud computing = pag-rent ng computing power (servers, storage, databases) through the internet. Hindi mo na kailangang bumili at mag-maintain ng sarili mong hardware.',
+      'Cloud computing = renting computing power (servers, storage, databases) over the internet. You don\'t need to buy and maintain your own hardware anymore.',
   },
   {
     id: 2,
-    question: 'Alin sa mga ito ang HINDI kasama sa "Big 3" cloud providers?',
+    question: 'Which of the following is NOT part of the "Big 3" cloud providers?',
     options: [
       'Amazon Web Services (AWS)',
       'Microsoft Azure',
@@ -34,20 +35,20 @@ const quizQuestions: QuizQuestion[] = [
     ],
     correctIndex: 3,
     explanation:
-      'Ang Big 3 ay AWS, Azure, at GCP. Sila ang pinakamalaki sa market. May iba pa like IBM Cloud, Oracle Cloud, etc., pero hindi sila parte ng Big 3.',
+      'The Big 3 are AWS, Azure, and GCP. They are the biggest in the market. There are others like IBM Cloud, Oracle Cloud, etc., but they are not part of the Big 3.',
   },
   {
     id: 3,
-    question: 'Bakit sinasabing "hindi magic" ang cloud?',
+    question: 'Why do we say the cloud is "not magic"?',
     options: [
-      'Kasi may actual na physical servers at data centers siya sa buong mundo',
-      'Kasi hindi reliable ang cloud services',
-      'Kasi libre lahat ng cloud services',
-      'Kasi walang internet connection needed',
+      'Because it has actual physical servers and data centers all over the world',
+      'Because cloud services are not reliable',
+      'Because all cloud services are completely free',
+      'Because it doesn\'t need an internet connection',
     ],
     correctIndex: 0,
     explanation:
-      'Cloud = real na physical data centers na naka-spread sa buong mundo. Hindi siya magic — may buildings, servers, undersea cables, at engineers na nagpa-patakbo ng lahat.',
+      'Cloud = real physical data centers spread across the world. It\'s not magic — there are buildings, servers, undersea cables, and engineers running everything.',
   },
 ];
 
@@ -80,18 +81,18 @@ export default function Lesson1Content() {
             {/* Title */}
             <h1 className="animate-fade-in-up delay-100 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-[family-name:var(--font-space-grotesk)] leading-tight mb-6">
               <span className="text-white">Lesson 1: </span>
-              <span className="text-gradient-primary">Ano ba Cloud?</span>
+              <span className="text-gradient-primary">What is the Cloud?</span>
               <br />
               <span className="text-slate-400 text-2xl sm:text-3xl md:text-4xl font-medium">
-                Bakit di na PC sa bahay?
+                Why not use a home PC?
               </span>
             </h1>
 
             {/* Description */}
             <p className="animate-fade-in-up delay-200 text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed mb-8">
-              Sa lesson na &apos;to, aalamin natin kung ano talaga ang <strong className="text-blue-400">Cloud Computing</strong>, 
-              bakit nag-shift ang mundo dito, at sino ang mga big players. 
-              Hindi natin kailangan ng complicated na jargon — Taglish lang tayo. ☁️
+              In this lesson, we will learn what <strong className="text-blue-400">Cloud Computing</strong> really is, 
+              why the world shifted to it, and who the big players are. 
+              We don&apos;t need complicated jargon — just simple English. ☁️
             </p>
 
             {/* Meta info */}
@@ -106,13 +107,13 @@ export default function Lesson1Content() {
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342" />
                 </svg>
-                4 na sections + quiz
+                4 sections + quiz
               </span>
               <span className="flex items-center gap-1.5">
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
                 </svg>
-                Taglish
+                English
               </span>
             </div>
 
@@ -137,83 +138,73 @@ export default function Lesson1Content() {
           <div className="max-w-4xl mx-auto space-y-8">
 
             {/* SECTION 1: Analogy */}
-            <div id="analogy">
-              <LessonCard
-                icon="☁️"
-                title="Analogy: Cloud = Jollibee Kitchen"
-                gradient="from-blue-500/20 to-cyan-500/20"
-                delay={0}
-              >
-                <p>
-                  Isipin mo &apos;to: gusto mo kumain ng Chickenjoy. Kailangan mo ba mag-build ng sarili mong kitchen,
-                  bumili ng deep fryer, mag-hire ng cook, at mag-maintain ng equipment? <strong className="text-blue-300">Hindi naman, diba?</strong>
-                </p>
-                <p>
-                  Pupunta ka lang sa Jollibee, mag-order, at kumain. Yung Jollibee ang may-ari ng kitchen, 
-                  sila ang nag-maintain, sila ang nag-hire ng staff. <strong className="text-cyan-300">Ikaw, kumakain ka lang.</strong>
-                </p>
-                <p>
-                  Ganyan din ang <strong className="text-blue-300">Cloud Computing</strong>. Instead na bumili ka ng sarili mong server 
-                  (yung computer na laging bukas 24/7), mag-rent ka na lang ng computing power sa internet. 
-                  Yung cloud provider (like AWS) ang may-ari ng servers, sila ang nag-maintain, 
-                  ikaw — <strong className="text-cyan-300">gagamit ka lang.</strong> 🍗
-                </p>
-                <div className="mt-4 p-3 rounded-xl bg-blue-500/5 border border-blue-500/10 text-blue-300/80 text-sm">
-                  💡 <strong>TL;DR:</strong> Cloud = &quot;rent, don&apos;t buy&quot; approach sa computing resources. Parang Grab vs. bumili ng sariling kotse.
-                </div>
-              </LessonCard>
+            <LessonCard id="analogy" icon="🍕" title="The Netflix Analogy" gradient="from-blue-500/20 to-indigo-500/20">
+            <div className="space-y-4 text-slate-300 leading-relaxed">
+              <p>
+                Think of how we used to watch movies in the 2000s:
+              </p>
+              <ul className="list-none space-y-3 pl-2">
+                <li className="flex items-start gap-3">
+                  <span className="text-red-400 mt-1">❌</span>
+                  <span><strong>The Old Way (On-Premises):</strong> You buy a DVD player. You buy DVDs. You have to clean them, store them in a rack, and if the DVD gets scratched, you lose the movie. If you want a new movie, you have to buy another physical disc.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-emerald-400 mt-1">✅</span>
+                  <span><strong>The Cloud Way (Netflix):</strong> You just subscribe. You don&apos;t buy DVDs or players. You just stream it over the internet. Netflix handles all the storage and maintenance.</span>
+                </li>
+              </ul>
+              <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-200 mt-6">
+                💡 <strong>Simply put:</strong> Cloud Computing is just renting computers, storage, and databases over the internet instead of buying and maintaining your own hardware!
+              </div>
             </div>
+          </LessonCard>
 
             {/* SECTION 2: Problems Solved */}
-            <div id="problems">
-              <LessonCard
-                icon="🔧"
-                title="Anong Problema ang Na-solve ng Cloud?"
-                gradient="from-purple-500/20 to-pink-500/20"
-                delay={100}
-              >
-                <p>
-                  Noon, pag may startup ka o company, kailangan mo bumili ng <strong className="text-purple-300">physical servers</strong>. 
-                  Ang mahal! At kapag biglang dumami users mo? GG — di kaya ng server mo. 💀
-                </p>
-
-                <div className="grid sm:grid-cols-2 gap-3 mt-2">
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    <div className="text-lg mb-1">📈</div>
-                    <div className="font-semibold text-white text-sm mb-1">Scalability</div>
-                    <p className="text-xs text-slate-400">
-                      Dumami users? Dagdagan lang ang servers sa ilang clicks. Bumaba? Bawasan. Pay for what you use lang.
-                    </p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    <div className="text-lg mb-1">💰</div>
-                    <div className="font-semibold text-white text-sm mb-1">Cost Savings</div>
-                    <p className="text-xs text-slate-400">
-                      Wala nang malaking upfront cost para sa hardware. Parang electric bill — bayad ka lang sa nagamit mo.
-                    </p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    <div className="text-lg mb-1">🌍</div>
-                    <div className="font-semibold text-white text-sm mb-1">Global Reach</div>
-                    <p className="text-xs text-slate-400">
-                      Deploy sa US, Europe, Asia — in minutes. Hindi mo na kailangan mag-ship ng server physically.
-                    </p>
-                  </div>
-                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]">
-                    <div className="text-lg mb-1">🛡️</div>
-                    <div className="font-semibold text-white text-sm mb-1">Disaster Recovery</div>
-                    <p className="text-xs text-slate-400">
-                      Na-flood yung office? Okay lang, nasa cloud ang data mo. May backup sa ibang region pa.
-                    </p>
-                  </div>
+            <LessonCard id="problems" icon="😰" title="Why do companies move to the Cloud?" gradient="from-purple-500/20 to-pink-500/20">
+            <div className="space-y-4 text-slate-300 leading-relaxed">
+              <p>
+                Before the cloud existed, companies had to buy massive physical servers (On-Premises). This created huge problems:
+              </p>
+              
+              <div className="grid sm:grid-cols-2 gap-4 mt-6">
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xl">💰</span> Too Expensive
+                  </h4>
+                  <p className="text-sm text-slate-400">
+                    You have to buy the servers upfront. Even if you don&apos;t use them 24/7, you still paid full price. With the cloud, you only pay for what you use (Pay-as-you-go).
+                  </p>
                 </div>
-
-                <div className="mt-4 p-3 rounded-xl bg-purple-500/5 border border-purple-500/10 text-purple-300/80 text-sm">
-                  💡 <strong>Fun fact:</strong> Netflix dati may sariling data center. Nag-migrate sila completely sa AWS kasi mas mura at mas reliable. 
-                  Imagine — yung Netflix na pinapanood mo, naka-AWS lahat yan!
+                
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xl">📈</span> Scaling Issues
+                  </h4>
+                  <p className="text-sm text-slate-400">
+                    Imagine you have an online store and it goes viral on TikTok. Your 1 server will crash from too much traffic! In the cloud, you can automatically add 100 servers in just 1 minute.
+                  </p>
                 </div>
-              </LessonCard>
+                
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xl">🛠️</span> High Maintenance
+                  </h4>
+                  <p className="text-sm text-slate-400">
+                    In the old days, you needed to hire people just to clean, cool, and fix broken hardware. In the cloud, the provider does all the heavy lifting.
+                  </p>
+                </div>
+                
+                <div className="p-5 rounded-2xl bg-white/5 border border-white/10">
+                  <h4 className="text-white font-bold mb-2 flex items-center gap-2">
+                    <span className="text-xl">🌍</span> Global Reach
+                  </h4>
+                  <p className="text-sm text-slate-400">
+                    If your server is in the Philippines, a user in the US will experience lag. With the cloud, you can deploy your app to US servers with just one click.
+                  </p>
+                </div>
+              </div>
             </div>
+          </LessonCard>
 
             {/* SECTION 3: Big 3 Providers */}
             <div id="big3">
@@ -224,8 +215,8 @@ export default function Lesson1Content() {
                 delay={200}
               >
                 <p>
-                  May tatlong pinakamalaking cloud provider sa mundo — sila yung <strong className="text-amber-300">&quot;Big 3&quot;</strong>. 
-                  Parang Smart, Globe, at DITO ng cloud world. Pero syempre, mas malaki ang laban nila. 😂
+                  There are three major cloud providers in the world — they are known as the <strong className="text-amber-300">&quot;Big 3&quot;</strong>. 
+                  Think of them as the AT&T, Verizon, and T-Mobile of the cloud world. But of course, the competition is much bigger. 😂
                 </p>
 
                 {/* Provider image */}
@@ -245,8 +236,8 @@ export default function Lesson1Content() {
                     <div>
                       <div className="font-bold text-orange-300 text-sm">Amazon Web Services (AWS)</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        Pinakamalaki — ~31% market share. Pinakamaraming services (200+). 
-                        Dito nag-start ang cloud revolution. Best for: overall versatility at enterprise.
+                        The biggest one — ~31% market share. They have the most services (200+). 
+                        This is where the cloud revolution started. Best for: overall versatility and enterprise.
                       </p>
                     </div>
                   </div>
@@ -255,8 +246,8 @@ export default function Lesson1Content() {
                     <div>
                       <div className="font-bold text-blue-300 text-sm">Microsoft Azure</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        ~24% market share. Best pag gumagamit ka na ng Microsoft tools (Office 365, Active Directory). 
-                        Sikat sa mga corporate/enterprise companies.
+                        ~24% market share. Best if you are already using Microsoft tools (Office 365, Active Directory). 
+                        Very popular among corporate and enterprise companies.
                       </p>
                     </div>
                   </div>
@@ -265,16 +256,16 @@ export default function Lesson1Content() {
                     <div>
                       <div className="font-bold text-emerald-300 text-sm">Google Cloud Platform (GCP)</div>
                       <p className="text-xs text-slate-400 mt-0.5">
-                        ~11% market share. Best sa data analytics, AI/ML, at Kubernetes.
-                        Fun fact: GCP ang gamit ng YouTube at Google Search internally.
+                        ~11% market share. Best for data analytics, AI/ML, and Kubernetes.
+                        Fun fact: GCP is what YouTube and Google Search use internally.
                       </p>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-4 p-3 rounded-xl bg-amber-500/5 border border-amber-500/10 text-amber-300/80 text-sm">
-                  💡 <strong>Sa course na &apos;to,</strong> mag-focus tayo sa <strong>AWS</strong> kasi pinakamalaki ang market at pinakamaraming job postings.
-                  Pero once matutunan mo yung concepts, madali na mag-switch sa Azure o GCP.
+                  💡 <strong>In this course,</strong> we will focus on <strong>AWS</strong> because it has the largest market share and the most job postings.
+                  But once you learn the concepts, it will be easy to switch to Azure or GCP.
                 </div>
               </LessonCard>
             </div>
@@ -283,37 +274,37 @@ export default function Lesson1Content() {
             <div id="not-magic">
               <LessonCard
                 icon="🪄"
-                title="Hindi Magic ang Cloud"
+                title="The Cloud is Not Magic"
                 gradient="from-rose-500/20 to-red-500/20"
                 delay={300}
               >
                 <p>
-                  Common misconception: <em className="text-rose-300">&quot;Nasa cloud na kasi&quot;</em> — parang floating sa hangin ang data mo. 
-                  <strong className="text-rose-300"> Hindi po. 😅</strong>
+                  A common misconception: <em className="text-rose-300">&quot;Because it&apos;s in the cloud&quot;</em> — it&apos;s like your data is floating in the air. 
+                  <strong className="text-rose-300">It&apos;s not. 😅</strong>
                 </p>
                 <p>
-                  Ang cloud ay <strong className="text-white">totoong physical computers</strong> — naka-rack sa mga malaking buildings 
-                  na tinatawag na <strong className="text-rose-300">data centers</strong>. May aircon, may generators, may 24/7 security guards pa.
+                  The cloud is made of <strong className="text-white">real physical computers</strong> — stacked in massive buildings 
+                  called <strong className="text-rose-300">data centers</strong>. They have air conditioning, generators, and even 24/7 security guards.
                 </p>
                 <p>
-                  Yung mga data centers na &apos;to, naka-spread sa buong mundo. Connected sila through 
-                  <strong className="text-rose-300"> undersea fiber optic cables</strong> — oo, sa ilalim ng dagat! 🌊
+                  These data centers are spread all over the world. They are connected through 
+                  <strong className="text-rose-300"> undersea fiber optic cables</strong> — yes, under the ocean! 🌊
                 </p>
 
                 <div className="mt-3 p-4 rounded-xl bg-slate-800/50 border border-white/[0.06]">
-                  <div className="font-semibold text-white text-sm mb-2">🏗️ Ano ang nasa loob ng Data Center?</div>
+                  <div className="font-semibold text-white text-sm mb-2">🏗️ What is inside a Data Center?</div>
                   <ul className="space-y-1.5 text-xs text-slate-400">
                     <li className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-rose-400" />
-                      <span><strong className="text-slate-300">Servers</strong> — thousands of them, naka-stack sa racks</span>
+                      <span><strong className="text-slate-300">Servers</strong> — thousands of them, stacked in racks</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-rose-400" />
-                      <span><strong className="text-slate-300">Cooling Systems</strong> — kasi sobrang init ng servers pag 24/7 bukas</span>
+                      <span><strong className="text-slate-300">Cooling Systems</strong> — because servers get really hot running 24/7</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-rose-400" />
-                      <span><strong className="text-slate-300">Backup Power</strong> — generators at battery systems para walang downtime</span>
+                      <span><strong className="text-slate-300">Backup Power</strong> — generators and battery systems so there&apos;s no downtime</span>
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-rose-400" />
@@ -327,8 +318,8 @@ export default function Lesson1Content() {
                 </div>
 
                 <div className="mt-4 p-3 rounded-xl bg-rose-500/5 border border-rose-500/10 text-rose-300/80 text-sm">
-                  💡 <strong>Remember:</strong> &quot;The cloud is just someone else&apos;s computer.&quot; — Pero with enterprise-grade security, 
-                  redundancy, at global reach na hindi mo kaya mag-isa.
+                  💡 <strong>Remember:</strong> &quot;The cloud is just someone else&apos;s computer.&quot; — But with enterprise-grade security, 
+                  redundancy, and global reach that you couldn&apos;t easily build on your own.
                 </div>
               </LessonCard>
             </div>
@@ -350,8 +341,8 @@ export default function Lesson1Content() {
                   Ready for the next lesson?
                 </h3>
                 <p className="text-sm text-slate-400 mb-5 max-w-sm">
-                  Sa Lesson 2, matututo tayo tungkol sa <strong className="text-blue-400">Cloud Service Models</strong> — 
-                  IaaS, PaaS, at SaaS. Ano ang pinagkaiba at kailan gagamitin?
+                  In Lesson 2, we will learn about <strong className="text-blue-400">Cloud Service Models</strong> — 
+                  IaaS, PaaS, and SaaS. What&apos;s the difference and when should you use them?
                 </p>
                 <Link
                   href="/lesson-2"
@@ -368,15 +359,22 @@ export default function Lesson1Content() {
           </div>
         </section>
 
+        {/* Discussion */}
+        <section className="py-8 px-4">
+          <div className="max-w-3xl mx-auto">
+            <DiscussionSection lessonSlug="lesson-1" />
+          </div>
+        </section>
+
         {/* ================================================================
             FOOTER
             ================================================================ */}
         <footer className="border-t border-white/[0.04] py-8 px-4">
           <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
             <div className="flex items-center gap-2">
-              <span className="text-gradient-primary font-bold">CloudEng PH</span>
+              <span className="text-gradient-primary font-bold">CloudEng</span>
               <span>•</span>
-              <span>Made with ☁️ for aspiring Pinoy cloud engineers</span>
+              <span>Made with ☁️ for aspiring cloud engineers</span>
             </div>
             <div className="flex items-center gap-4">
               <span>© 2026</span>

@@ -178,7 +178,7 @@ export default function Navbar() {
       >
         <div className="px-4 py-3 space-y-1 bg-slate-900/95 backdrop-blur-xl">
           <MobileNavLink href="/" label="Home" onClick={() => setMenuOpen(false)} />
-          <MobileNavLink href="/lessons" label="Lessons" onClick={() => setMenuOpen(false)} />
+          <MobileNavLink href="/lesson-1" label="Lessons" onClick={() => setMenuOpen(false)} />
           <MobileNavLink href="/labs/aws-setup" label="Labs" onClick={() => setMenuOpen(false)} />
           <MobileNavLink href="/leaderboard" label="Leaderboard" onClick={() => setMenuOpen(false)} />
           <MobileNavLink href="/playground" label="Playground" onClick={() => setMenuOpen(false)} />
