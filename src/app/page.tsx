@@ -49,7 +49,7 @@ const lessons = [
   {
     id: 4,
     slug: 'lesson-3',
-    title: 'Lesson 3: Compute, Storage, Networking',
+    title: 'Compute, Storage, Networking',
     description: 'The Big 3 of Cloud Services — EC2, S3, and VPC. Learn how they work together.',
     module: 'Module 2 — Getting Started',
     difficulty: 'Beginner',
@@ -83,6 +83,19 @@ const lessons = [
     sections: 6,
     icon: '🌐',
     gradient: 'from-cyan-500 to-blue-500',
+    available: true,
+  },
+  {
+    id: 7,
+    slug: 'lesson-4',
+    title: 'Infrastructure as Code (IaC)',
+    description: 'Stop clicking, start coding! Learn how to automate cloud deployments using Terraform — the industry standard.',
+    module: 'Module 3 — Automation & Scaling',
+    difficulty: 'Intermediate',
+    duration: '~15 min',
+    sections: 5,
+    icon: '🏗️',
+    gradient: 'from-violet-500 to-fuchsia-500',
     available: true,
   },
 ];
@@ -143,14 +156,14 @@ export default function HomePage() {
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
               </Link>
               <span className="text-sm text-slate-500">
-                6 lessons & labs available • More coming soon
+                7 lessons & labs available • More coming soon
               </span>
             </div>
 
             {/* Stats */}
             <div className={`mt-16 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto transition-all duration-700 delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">6</div>
+                <div className="text-2xl sm:text-3xl font-bold text-white font-[family-name:var(--font-space-grotesk)]">7</div>
                 <div className="text-xs text-slate-500 mt-1">Lessons & Labs</div>
               </div>
               <div className="text-center border-x border-white/[0.06]">

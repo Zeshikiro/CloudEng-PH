@@ -60,6 +60,8 @@ export default function ProgressBar({ sections }: ProgressBarProps) {
               analogy: 'Analogy', problems: 'Problems', big3: 'Big 3', 'not-magic': 'Not Magic',
               pizza: 'Pizza Analogy', iaas: 'IaaS', 'paas-saas': 'PaaS & SaaS', comparison: 'Comparison',
               compute: 'Compute', storage: 'Storage', networking: 'Networking', together: 'Together',
+              'what-is-iac': 'What is IaC', 'why-iac': 'Why IaC', terraform: 'Terraform',
+              'code-example': 'Code', challenge: 'Challenge',
               quiz: 'Quiz',
             };
             const label = labelMap[sectionId] || sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
