@@ -79,7 +79,7 @@ function CelebrationScreen({ title }: { title: string }) {
           Lab Complete!
         </h2>
         <p className="text-lg text-slate-300 max-w-md mx-auto mb-2">
-          Congratulations! Na-finish mo na ang
+          Congratulations! You have finished
         </p>
         <p className="text-xl font-semibold text-gradient-primary mb-8">
           {title}

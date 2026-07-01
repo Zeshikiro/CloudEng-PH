@@ -91,7 +91,7 @@ export default function LeaderboardContent() {
             🏆 Leaderboard
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Sino ang top Cloud Engineers ng Pilipinas?
+            Who are the top Cloud Engineers?
           </p>
         </div>
 
@@ -102,7 +102,7 @@ export default function LeaderboardContent() {
         ) : leaderboard.length === 0 ? (
           <div className="text-center p-12 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/[0.08]">
             <div className="text-6xl mb-6">🏃‍♂️</div>
-            <h2 className="text-2xl font-bold text-white mb-4">Wala pang entries sa leaderboard.</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">No entries in the leaderboard yet.</h2>
             <p className="text-slate-400 mb-8">Be the first! Take a quiz to get on the board.</p>
             <Link 
               href="/lesson-1"

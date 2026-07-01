@@ -221,7 +221,7 @@ export default function AdminContent() {
                 <textarea
                   value={lesson.description}
                   onChange={e => setLesson(p => ({ ...p, description: e.target.value }))}
-                  placeholder="Short description ng lesson..."
+                  placeholder="Short description of the lesson..."
                   rows={3}
                   className="w-full px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white placeholder-slate-600 text-sm focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/25 transition-all resize-none"
                 />
@@ -284,7 +284,7 @@ export default function AdminContent() {
                       <button onClick={() => removeQuiz(idx)} className="text-red-400 text-xs hover:text-red-300">Remove</button>
                     )}
                   </div>
-                  <InputField label="Question" value={q.question} onChange={v => updateQuiz(idx, 'question', v)} placeholder="Ano ang...?" />
+                  <InputField label="Question" value={q.question} onChange={v => updateQuiz(idx, 'question', v)} placeholder="What is...?" />
                   <div className="grid grid-cols-2 gap-3">
                     {q.options.map((opt, oi) => (
                       <div key={oi} className="relative">

@@ -3,7 +3,7 @@ import Lesson2Content from './Lesson2Content';
 
 export const metadata: Metadata = {
   title: 'Lesson 2: IaaS, PaaS, SaaS — CloudEng PH',
-  description: 'Alamin ang tatlong service models ng Cloud Computing: IaaS, PaaS, at SaaS. Taglish explanation with pizza analogy.',
+  description: 'Learn the three service models of Cloud Computing: IaaS, PaaS, and SaaS. Simple explanation with a pizza analogy.',
 };
 
 export default function Lesson2Page() {

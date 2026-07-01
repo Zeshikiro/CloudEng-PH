@@ -4,7 +4,7 @@ import AwsSetupLab from './AwsSetupLab';
 export const metadata: Metadata = {
   title: 'Lab: AWS Account Setup — CloudEng PH',
   description:
-    'Step-by-step hands-on lab: Gumawa ng AWS Free Tier account at i-navigate ang AWS Console.',
+    'Step-by-step hands-on lab: Create an AWS Free Tier account and navigate the AWS Console.',
 };
 
 export default function AwsSetupLabPage() {

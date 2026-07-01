@@ -159,9 +159,9 @@ export default function Quiz({ lessonId, questions }: QuizProps) {
 
   const getScoreEmoji = () => {
     const pct = score / questions.length;
-    if (pct === 1) return { emoji: '🎉', label: 'Perfect Score!', sublabel: 'Astig ka pre! Cloud expert ka na!' };
-    if (pct >= 0.66) return { emoji: '👍', label: 'Magaling!', sublabel: 'Halos lahat tama mo, konting review na lang!' };
-    return { emoji: '💪', label: 'Try Ulit!', sublabel: 'Okay lang yan, balik ka sa lessons tapos try ulit!' };
+    if (pct === 1) return { emoji: '🎉', label: 'Perfect Score!', sublabel: 'Awesome! You are a cloud expert!' };
+    if (pct >= 0.66) return { emoji: '👍', label: 'Great Job!', sublabel: 'Almost perfect, just a quick review needed!' };
+    return { emoji: '💪', label: 'Try Again!', sublabel: 'That is okay, go back to the lessons and try again!' };
   };
 
   return (
@@ -180,7 +180,7 @@ export default function Quiz({ lessonId, questions }: QuizProps) {
         <p className="text-slate-400 text-sm">
           {savedScore !== null && !isSubmitted
             ? `Previous score: ${savedScore}/${questions.length}`
-            : 'Sagutin mo yung mga tanong na \'to para ma-check kung naintindihan mo.'}
+            : 'Answer these questions to check your understanding.'}
         </p>
       </div>
 
@@ -321,7 +321,7 @@ export default function Quiz({ lessonId, questions }: QuizProps) {
                 : 'bg-slate-800 text-slate-500 border border-white/[0.06] cursor-not-allowed'
             }`}
           >
-            {allAnswered ? '🚀 Submit Answers' : `Pumili ka muna ng sagot (${Object.keys(selectedAnswers).length}/${questions.length})`}
+            {allAnswered ? '🚀 Submit Answers' : `Please select an answer first (${Object.keys(selectedAnswers).length}/${questions.length})`}
           </button>
         </div>
       )}

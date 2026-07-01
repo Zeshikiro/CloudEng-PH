@@ -57,7 +57,7 @@ export default function ProgressBar({ sections }: ProgressBarProps) {
         <div className="flex items-center justify-between">
           {sections.map((sectionId, index) => {
             const labelMap: Record<string, string> = {
-              analogy: 'Analogy', problems: 'Problems', big3: 'Big 3', 'not-magic': 'Hindi Magic',
+              analogy: 'Analogy', problems: 'Problems', big3: 'Big 3', 'not-magic': 'Not Magic',
               pizza: 'Pizza Analogy', iaas: 'IaaS', 'paas-saas': 'PaaS & SaaS', comparison: 'Comparison',
               compute: 'Compute', storage: 'Storage', networking: 'Networking', together: 'Together',
               quiz: 'Quiz',
