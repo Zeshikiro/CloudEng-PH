@@ -318,8 +318,8 @@ export default function Lesson2Content() {
                 <div className="p-4 rounded-xl bg-pink-500/5 border border-pink-500/10 mb-4">
                   <h4 className="font-bold text-pink-300 text-base mb-2">📦 SaaS — Software as a Service</h4>
                   <p>
-                    SaaS is the simplest. It is a <strong className="text-pink-300">ready-to-use application</strong> that is
-                    accessible through a browser or an app. You don&apos;t need to code or maintain it — you just use it.
+                    SaaS is the simplest. It is a <strong className="text-pink-300">ready-to-use application</strong>{' '}
+                    that is accessible through a browser or an app. You don&apos;t need to code or maintain it — you just use it.
                   </p>
                   <div className="mt-3">
                     <div className="font-semibold text-white text-xs mb-1.5">SaaS You Use Every Day:</div>
@@ -405,9 +405,9 @@ export default function Lesson2Content() {
                 </div>
 
                 <div className="mt-5 p-3 rounded-xl bg-emerald-500/5 border border-emerald-500/10 text-emerald-300/80 text-sm">
-                  💡 <strong>Remember:</strong> In the real world, companies use a <strong>MIX</strong> of all three. It&apos;s not an either/or situation.
+                  💡 <strong>Remember:</strong>{' '}In the real world, companies use a <strong>MIX</strong>{' '}of all three. It&apos;s not an either/or situation.
                   They might use IaaS for backend servers, PaaS for quick deployments, and SaaS for email and collaboration tools.
-                  What&apos;s important is knowing <strong>when to use each one</strong>. 🎯
+                  What&apos;s important is knowing <strong>when to use each one</strong>.{' '}🎯
                 </div>
               </LessonCard>
             </div>
