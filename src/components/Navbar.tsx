@@ -68,6 +68,7 @@ export default function Navbar() {
             <NavLink href="/labs/aws-setup" label="Labs" />
             <NavLink href="/leaderboard" label="Leaderboard" />
             <NavLink href="/playground" label="Playground" />
+            <NavLink href="/missions" label="Missions" />
           </div>
 
           {/* Auth + Mobile Menu */}
@@ -182,6 +183,7 @@ export default function Navbar() {
           <MobileNavLink href="/labs/aws-setup" label="Labs" onClick={() => setMenuOpen(false)} />
           <MobileNavLink href="/leaderboard" label="Leaderboard" onClick={() => setMenuOpen(false)} />
           <MobileNavLink href="/playground" label="Playground" onClick={() => setMenuOpen(false)} />
+          <MobileNavLink href="/missions" label="Missions" onClick={() => setMenuOpen(false)} />
 
           <div className="pt-2 border-t border-white/[0.06] mt-2">
             {user ? (
