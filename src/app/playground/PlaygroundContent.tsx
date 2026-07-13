@@ -45,6 +45,16 @@ interface CodingExercise {
   explanation: string;
 }
 
+interface SimulationScenario {
+  id: string;
+  title: string;
+  alertMessage: string;
+  expectedCommand: string;
+  successMessage: string;
+  failureMessage: string;
+  hint: string;
+}
+
 /* ------------------------------------------------------------------ */
 /*  Architecture Data                                                  */
 /* ------------------------------------------------------------------ */
@@ -256,10 +266,53 @@ const devopsExercises: CodingExercise[] = [
 const allExercises = [...cloudExercises, ...devopsExercises];
 
 /* ------------------------------------------------------------------ */
+/*  Simulation Data (On-Call Simulator)                                */
+/* ------------------------------------------------------------------ */
+
+const simulationScenarios: SimulationScenario[] = [
+  {
+    id: 'sim-502',
+    title: 'The 502 Bad Gateway',
+    alertMessage: '🚨 URGENT: The main website is throwing 502 Bad Gateway errors. Users can not log in! The nginx reverse proxy is running, but the backend Node.js app service seems to have crashed.',
+    expectedCommand: 'sudo systemctl restart myapp',
+    successMessage: 'Phew! The website is back up. Restarting the backend service fixed the 502 error.',
+    failureMessage: 'That command did not fix the issue. We need to restart the backend service called "myapp" using systemctl.',
+    hint: 'Use "sudo systemctl restart <service_name>"',
+  },
+  {
+    id: 'sim-disk-full',
+    title: '100% Disk Full',
+    alertMessage: '🚨 URGENT: The database server is unresponsive. Monitoring shows the root disk is 100% full due to massive log files in /var/log/. We need to check disk space quickly!',
+    expectedCommand: 'df -h',
+    successMessage: 'Great. Now we can see the disk is full. (In a real scenario, you would then run "rm /var/log/*.log" to clear space).',
+    failureMessage: 'We need to check the disk space in human-readable format to confirm the issue.',
+    hint: 'Use the "disk free" command with the human-readable flag (-h).',
+  },
+  {
+    id: 'sim-docker-crash',
+    title: 'Container Crash Loop',
+    alertMessage: '🚨 URGENT: The new microservice was just deployed but it is not responding. I suspect the Docker container crashed. How do we see all containers, including stopped ones?',
+    expectedCommand: 'docker ps -a',
+    successMessage: 'Excellent! We found the stopped container. It exited with code 1. We will check the logs next.',
+    failureMessage: 'That is not right. We need to list ALL containers, even the ones that are not currently running.',
+    hint: 'Add the "-a" flag to the standard docker process list command.',
+  },
+  {
+    id: 'sim-git-revert',
+    title: 'Bad Deployment Rollback',
+    alertMessage: '🚨 URGENT: The latest commit broke the staging environment! We need to quickly switch back to the main branch from our current feature branch so we can push a hotfix.',
+    expectedCommand: 'git checkout main',
+    successMessage: 'Perfect! We are back on the stable main branch. Crisis averted.',
+    failureMessage: 'We just need to switch branches to "main".',
+    hint: 'Use the git command to switch/checkout branches.',
+  }
+];
+
+/* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-type TabType = 'cloud' | 'devops' | 'architecture';
+type TabType = 'cloud' | 'devops' | 'architecture' | 'simulator';
 
 export default function PlaygroundContent() {
   const [activeTab, setActiveTab] = useState<TabType>('cloud');
@@ -281,6 +334,14 @@ export default function PlaygroundContent() {
   const [codeResult, setCodeResult] = useState<'success' | 'fail' | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [mounted, setMounted] = useState(false);
+  
+  // Simulator State
+  const [simIndex, setSimIndex] = useState(0);
+  const [simCommand, setSimCommand] = useState('');
+  const [simLogs, setSimLogs] = useState<{sender: 'admin' | 'user' | 'system', text: string}[]>([
+    { sender: 'admin', text: simulationScenarios[0].alertMessage }
+  ]);
+  const [simStatus, setSimStatus] = useState<'active' | 'resolved'>('active');
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
@@ -359,6 +420,42 @@ export default function PlaygroundContent() {
     setUserCode(selectedExercise.expectedAnswer); setCodeResult(null); setShowExplanation(true);
   }, [selectedExercise]);
 
+  /* Simulator Handlers */
+  const runSimCommand = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    if (!simCommand.trim() || simStatus === 'resolved') return;
+    
+    const currentSim = simulationScenarios[simIndex];
+    const userCmd = simCommand.trim();
+    
+    // Add user command to log
+    const newLogs = [...simLogs, { sender: 'user' as const, text: `$ ${userCmd}` }];
+    
+    if (normalizeCode(userCmd) === normalizeCode(currentSim.expectedCommand)) {
+      newLogs.push({ sender: 'system' as const, text: currentSim.successMessage });
+      setSimStatus('resolved');
+    } else {
+      newLogs.push({ sender: 'system' as const, text: `Command failed: ${currentSim.failureMessage}` });
+    }
+    
+    setSimLogs(newLogs);
+    setSimCommand('');
+  }, [simCommand, simStatus, simIndex, simLogs]);
+
+  const nextSimScenario = useCallback(() => {
+    const nextIndex = (simIndex + 1) % simulationScenarios.length;
+    setSimIndex(nextIndex);
+    setSimStatus('active');
+    setSimLogs([
+      { sender: 'admin', text: simulationScenarios[nextIndex].alertMessage }
+    ]);
+  }, [simIndex]);
+
+  const showSimHint = useCallback(() => {
+    const currentSim = simulationScenarios[simIndex];
+    setSimLogs(prev => [...prev, { sender: 'system' as const, text: `Hint: ${currentSim.hint}` }]);
+  }, [simIndex]);
+
   // Reset category when switching tabs
   const switchTab = useCallback((tab: TabType) => {
     setActiveTab(tab); setActiveCategory('All'); setActiveDifficulty('All');
@@ -374,7 +471,8 @@ export default function PlaygroundContent() {
   const tabs = [
     { id: 'cloud' as TabType, label: '☁️ Cloud Coding', color: 'bg-blue-500', count: cloudExercises.length },
     { id: 'devops' as TabType, label: '🔧 DevOps Coding', color: 'bg-purple-500', count: devopsExercises.length },
-    { id: 'architecture' as TabType, label: '🧩 Architecture Builder', color: 'bg-amber-500', count: scenarios.length },
+    { id: 'architecture' as TabType, label: '🧩 Architecture', color: 'bg-amber-500', count: scenarios.length },
+    { id: 'simulator' as TabType, label: '🚨 On-Call Simulator', color: 'bg-rose-500', count: simulationScenarios.length },
   ];
 
   return (
@@ -415,6 +513,87 @@ export default function PlaygroundContent() {
             </div>
           </div>
         </div>
+
+        {/* ================================================================ */}
+        {/* SIMULATOR TAB                                                    */}
+        {/* ================================================================ */}
+        {activeTab === 'simulator' && (
+          <div className="max-w-4xl mx-auto animate-fade-in">
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] shadow-2xl">
+              <div className="flex items-center justify-between mb-6 border-b border-white/[0.08] pb-4">
+                <div>
+                  <h2 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] flex items-center gap-3">
+                    🚨 On-Call Simulator
+                  </h2>
+                  <p className="text-slate-400 text-sm mt-1">Resolve real-world DevOps incidents. Type the correct terminal command to fix the issue.</p>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm font-bold text-slate-500 uppercase tracking-wider">Incident</div>
+                  <div className="text-xl font-bold text-rose-400">{simIndex + 1} / {simulationScenarios.length}</div>
+                </div>
+              </div>
+
+              {/* Chat / Terminal Area */}
+              <div className="space-y-4 mb-6 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                {simLogs.map((log, i) => (
+                  <div key={i} className={`flex ${log.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[80%] rounded-2xl p-4 text-sm ${
+                      log.sender === 'admin' 
+                        ? 'bg-rose-500/10 border border-rose-500/20 text-rose-100 rounded-tl-sm'
+                        : log.sender === 'user'
+                          ? 'bg-blue-500 text-white font-mono rounded-tr-sm shadow-lg shadow-blue-500/20'
+                          : log.text.includes('failed')
+                            ? 'bg-slate-800 border border-rose-500/30 text-rose-300 font-mono text-xs rounded-bl-sm'
+                            : log.text.includes('Hint')
+                              ? 'bg-amber-500/10 border border-amber-500/30 text-amber-200 font-mono text-xs rounded-bl-sm'
+                              : 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-mono rounded-bl-sm'
+                    }`}>
+                      {log.sender === 'admin' && <div className="text-rose-400 text-xs font-bold mb-1 uppercase tracking-wider">Lead DevOps Engineer</div>}
+                      {log.text}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Input Area */}
+              {simStatus === 'active' ? (
+                <form onSubmit={runSimCommand} className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <span className="text-emerald-400 font-mono font-bold">$</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={simCommand}
+                    onChange={(e) => setSimCommand(e.target.value)}
+                    placeholder="Type a bash/cli command to resolve the issue..."
+                    className="w-full bg-[#0d1117] border border-slate-700 rounded-xl py-4 pl-10 pr-32 text-[#58a6ff] font-mono focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all shadow-inner"
+                    spellCheck="false"
+                    autoFocus
+                  />
+                  <div className="absolute inset-y-0 right-2 flex items-center gap-2">
+                    <button type="button" onClick={showSimHint} className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition-colors">
+                      Hint
+                    </button>
+                    <button type="submit" className="px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold transition-colors">
+                      Run
+                    </button>
+                  </div>
+                </form>
+              ) : (
+                <div className="flex flex-col items-center justify-center p-6 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                  <div className="text-4xl mb-3">✅</div>
+                  <h3 className="text-emerald-400 font-bold text-lg mb-4">Incident Resolved!</h3>
+                  <button 
+                    onClick={nextSimScenario}
+                    className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 transition-all hover:-translate-y-1"
+                  >
+                    Next Incident →
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ================================================================ */}
         {/* ARCHITECTURE BUILDER TAB                                         */}

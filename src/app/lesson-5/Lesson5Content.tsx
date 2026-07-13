@@ -71,7 +71,7 @@ const quizQuestions: QuizQuestion[] = [
   },
 ];
 
-const sectionIds = ['what-engineers-do', 'devops-toolkit', 'devops-culture', 'quiz'];
+const sectionIds = ['what-engineers-do', 'devops-toolkit', 'devops-languages', 'devops-culture', 'quiz'];
 
 /* ================================================================== */
 /*  Responsibility Data                                                */
@@ -385,6 +385,69 @@ export default function Lesson5Content() {
               <strong>AWS</strong> (cloud) + <strong>GitHub Actions</strong> (CI/CD) + <strong>Docker</strong> (containers)
               + <strong>Terraform</strong> (IaC) + <strong>Bash/Python</strong> (scripting).
               This covers 80% of job postings for junior DevOps roles in the Philippines!
+            </div>
+          </LessonCard>
+        </div>
+
+        {/* ================================================================
+            SECTION 2.5: LANGUAGES PROGRESSION
+            ================================================================ */}
+        <div id="devops-languages" className="mt-8">
+          <LessonCard
+            icon="💻"
+            title="Programming Languages: Junior to Senior"
+            gradient="from-slate-500/20 to-indigo-500/20"
+            delay={150}
+          >
+            <p className="mb-4 text-slate-300">
+              A common question is: <strong className="text-white">"Do DevOps engineers need to know how to code?"</strong> Yes, absolutely. You are not building the web application, but you are writing scripts to automate infrastructure and deployments.
+            </p>
+            <p className="mb-6 text-slate-400">
+              Here is the typical language progression from Junior to Senior level:
+            </p>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              {/* Junior */}
+              <div className="p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-center">
+                <div className="text-3xl mb-2">🐚</div>
+                <h4 className="font-bold text-white mb-1">Junior Level</h4>
+                <p className="text-xs text-emerald-300 mb-3 font-semibold uppercase tracking-wider">The Foundation</p>
+                <div className="space-y-2 text-sm text-slate-300">
+                  <p><strong className="text-white">Bash / Shell</strong></p>
+                  <p><strong className="text-white">YAML / JSON</strong></p>
+                  <p className="text-xs text-slate-400 mt-2">Required for basic Linux automation, writing Dockerfiles, and setting up CI/CD pipelines.</p>
+                </div>
+              </div>
+
+              {/* Mid-Level */}
+              <div className="p-5 rounded-xl bg-blue-500/10 border border-blue-500/20 text-center relative">
+                <div className="absolute top-1/2 -left-4 w-8 h-8 -mt-4 bg-slate-800 border-2 border-slate-700 rounded-full flex items-center justify-center text-slate-400 font-bold hidden md:flex">→</div>
+                <div className="text-3xl mb-2">🐍</div>
+                <h4 className="font-bold text-white mb-1">Mid Level</h4>
+                <p className="text-xs text-blue-300 mb-3 font-semibold uppercase tracking-wider">The Automator</p>
+                <div className="space-y-2 text-sm text-slate-300">
+                  <p><strong className="text-white">Python</strong></p>
+                  <p><strong className="text-white">Node.js (Optional)</strong></p>
+                  <p className="text-xs text-slate-400 mt-2">Required for writing complex automation scripts, interacting with AWS APIs (Boto3), and serverless Lambda functions.</p>
+                </div>
+              </div>
+
+              {/* Senior */}
+              <div className="p-5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-center relative">
+                <div className="absolute top-1/2 -left-4 w-8 h-8 -mt-4 bg-slate-800 border-2 border-slate-700 rounded-full flex items-center justify-center text-slate-400 font-bold hidden md:flex">→</div>
+                <div className="text-3xl mb-2">🐹</div>
+                <h4 className="font-bold text-white mb-1">Senior Level</h4>
+                <p className="text-xs text-purple-300 mb-3 font-semibold uppercase tracking-wider">The Architect</p>
+                <div className="space-y-2 text-sm text-slate-300">
+                  <p><strong className="text-white">Go (Golang)</strong></p>
+                  <p><strong className="text-white">Rust (Emerging)</strong></p>
+                  <p className="text-xs text-slate-400 mt-2">Used to build custom Kubernetes operators, Terraform providers, and high-performance cloud-native tooling.</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="p-4 rounded-xl bg-indigo-500/5 border border-indigo-500/15 text-indigo-200 text-sm">
+              💡 <strong>Summary:</strong> Start by mastering <strong>Bash</strong> and writing <strong>YAML</strong>. Once you are comfortable, learn <strong>Python</strong>. You do not need to look at Go until you are much deeper into your career!
             </div>
           </LessonCard>
         </div>
