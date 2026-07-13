@@ -309,10 +309,22 @@ const simulationScenarios: SimulationScenario[] = [
 ];
 
 /* ------------------------------------------------------------------ */
+/*  Pipeline Data                                                      */
+/* ------------------------------------------------------------------ */
+
+const PIPELINE_STAGES = [
+  { id: 'lint', label: '1. Lint', icon: '🧹', color: 'bg-yellow-500/10 text-yellow-400 border-yellow-500/30' },
+  { id: 'test', label: '2. Test', icon: '🧪', color: 'bg-blue-500/10 text-blue-400 border-blue-500/30' },
+  { id: 'build', label: '3. Build', icon: '🔨', color: 'bg-purple-500/10 text-purple-400 border-purple-500/30' },
+  { id: 'push', label: '4. Push', icon: '☁️', color: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/30' },
+  { id: 'deploy', label: '5. Deploy', icon: '🚀', color: 'bg-green-500/10 text-green-400 border-green-500/30' }
+];
+
+/* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-type TabType = 'cloud' | 'devops' | 'architecture' | 'simulator';
+type TabType = 'cloud' | 'devops' | 'architecture' | 'simulator' | 'pipeline';
 
 export default function PlaygroundContent() {
   const [activeTab, setActiveTab] = useState<TabType>('cloud');
@@ -342,6 +354,13 @@ export default function PlaygroundContent() {
     { sender: 'admin', text: simulationScenarios[0].alertMessage }
   ]);
   const [simStatus, setSimStatus] = useState<'active' | 'resolved'>('active');
+
+  // Pipeline Builder State
+  const initialShuffled = ['build', 'deploy', 'lint', 'push', 'test'];
+  const [availableStages, setAvailableStages] = useState<string[]>(initialShuffled);
+  const [pipelineStages, setPipelineStages] = useState<string[]>([]);
+  const [pipelineStatus, setPipelineStatus] = useState<'idle' | 'running' | 'success' | 'fail'>('idle');
+  const [pipelineLogs, setPipelineLogs] = useState<string[]>([]);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => {
@@ -456,6 +475,57 @@ export default function PlaygroundContent() {
     setSimLogs(prev => [...prev, { sender: 'system' as const, text: `Hint: ${currentSim.hint}` }]);
   }, [simIndex]);
 
+  /* Pipeline Handlers */
+  const moveToPipeline = useCallback((id: string) => {
+    setAvailableStages(prev => prev.filter(s => s !== id));
+    setPipelineStages(prev => [...prev, id]);
+    setPipelineStatus('idle');
+    setPipelineLogs([]);
+  }, []);
+
+  const moveToAvailable = useCallback((id: string) => {
+    setPipelineStages(prev => prev.filter(s => s !== id));
+    setAvailableStages(prev => [...prev, id]);
+    setPipelineStatus('idle');
+    setPipelineLogs([]);
+  }, []);
+
+  const runPipeline = useCallback(() => {
+    if (pipelineStages.length === 0) return;
+    setPipelineStatus('running');
+    setPipelineLogs(['[SYSTEM] Starting CI/CD Pipeline...']);
+    
+    const expected = ['lint', 'test', 'build', 'push', 'deploy'];
+    
+    let currentStep = 0;
+    const interval = setInterval(() => {
+      if (currentStep >= pipelineStages.length) {
+        clearInterval(interval);
+        if (pipelineStages.length === expected.length) {
+          setPipelineLogs(prev => [...prev, '✅ All stages completed successfully!', '🎉 Pipeline Deployed to Production!']);
+          setPipelineStatus('success');
+        } else {
+          setPipelineLogs(prev => [...prev, '⚠️ Pipeline finished, but it is missing some required stages.']);
+          setPipelineStatus('fail');
+        }
+        return;
+      }
+
+      const stageId = pipelineStages[currentStep];
+      const expectedId = expected[currentStep];
+      
+      if (stageId !== expectedId) {
+        clearInterval(interval);
+        setPipelineLogs(prev => [...prev, `⏳ Running ${stageId}...`, `❌ ERROR: Expected stage '${expectedId}' but got '${stageId}'. Pipeline failed.`]);
+        setPipelineStatus('fail');
+        return;
+      }
+
+      setPipelineLogs(prev => [...prev, `⏳ Running ${stageId}...`, `✅ ${stageId} completed successfully.`]);
+      currentStep++;
+    }, 1000);
+  }, [pipelineStages]);
+
   // Reset category when switching tabs
   const switchTab = useCallback((tab: TabType) => {
     setActiveTab(tab); setActiveCategory('All'); setActiveDifficulty('All');
@@ -473,6 +543,7 @@ export default function PlaygroundContent() {
     { id: 'devops' as TabType, label: '🔧 DevOps Coding', color: 'bg-purple-500', count: devopsExercises.length },
     { id: 'architecture' as TabType, label: '🧩 Architecture', color: 'bg-amber-500', count: scenarios.length },
     { id: 'simulator' as TabType, label: '🚨 On-Call Simulator', color: 'bg-rose-500', count: simulationScenarios.length },
+    { id: 'pipeline' as TabType, label: '🔄 Pipeline Builder', color: 'bg-emerald-500', count: 1 },
   ];
 
   return (
@@ -591,6 +662,122 @@ export default function PlaygroundContent() {
                   </button>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* ================================================================ */}
+        {/* PIPELINE BUILDER TAB                                             */}
+        {/* ================================================================ */}
+        {activeTab === 'pipeline' && (
+          <div className="max-w-5xl mx-auto animate-fade-in">
+            <div className="p-6 sm:p-8 rounded-3xl bg-slate-900/60 backdrop-blur-xl border border-white/[0.08] shadow-2xl">
+              <div className="flex flex-col md:flex-row gap-8">
+                
+                {/* Left Side: Builder */}
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-white font-[family-name:var(--font-space-grotesk)] flex items-center gap-3 mb-2">
+                    🔄 CI/CD Pipeline Builder
+                  </h2>
+                  <p className="text-slate-400 text-sm mb-6">Drag or click the available stages to build a working CI/CD pipeline in the correct order. Then run it!</p>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Available Stages (Click to add)</h3>
+                    <div className="flex flex-wrap gap-3 p-4 rounded-xl bg-black/40 border border-white/10 min-h-[80px]">
+                      {availableStages.map(id => {
+                        const stage = PIPELINE_STAGES.find(s => s.id === id)!;
+                        return (
+                          <button
+                            key={id}
+                            onClick={() => moveToPipeline(id)}
+                            className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${stage.color} font-medium hover:opacity-80 transition-opacity`}
+                          >
+                            <span>{stage.icon}</span>
+                            <span>{stage.label}</span>
+                          </button>
+                        );
+                      })}
+                      {availableStages.length === 0 && <span className="text-slate-600 text-sm italic">All stages added.</span>}
+                    </div>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <h3 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Your Pipeline (Click to remove)</h3>
+                    <div className="flex flex-col gap-2 p-4 rounded-xl bg-black/40 border border-white/10 min-h-[300px]">
+                      {pipelineStages.map((id, idx) => {
+                        const stage = PIPELINE_STAGES.find(s => s.id === id)!;
+                        return (
+                          <div key={id} className="flex flex-col">
+                            <button
+                              onClick={() => moveToAvailable(id)}
+                              className={`flex items-center justify-between w-full p-4 rounded-xl border ${stage.color} hover:opacity-80 transition-opacity text-left`}
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className="text-2xl">{stage.icon}</span>
+                                <span className="font-bold text-lg">{stage.label}</span>
+                              </div>
+                              <div className="text-sm opacity-60 font-mono">Stage {idx + 1}</div>
+                            </button>
+                            {idx < pipelineStages.length - 1 && (
+                              <div className="flex justify-center py-1">
+                                <span className="text-slate-600">↓</span>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                      {pipelineStages.length === 0 && (
+                        <div className="flex-1 flex items-center justify-center text-slate-600 text-sm italic">
+                          Your pipeline is empty.
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  <button
+                    onClick={runPipeline}
+                    disabled={pipelineStages.length === 0 || pipelineStatus === 'running'}
+                    className={`w-full py-4 rounded-xl font-bold text-lg transition-all ${
+                      pipelineStages.length === 0 || pipelineStatus === 'running'
+                        ? 'bg-slate-800 text-slate-500 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-emerald-500/25 hover:-translate-y-1'
+                    }`}
+                  >
+                    {pipelineStatus === 'running' ? 'Running Pipeline...' : '▶ Run Pipeline'}
+                  </button>
+                </div>
+
+                {/* Right Side: Terminal */}
+                <div className="flex-1 flex flex-col">
+                  <div className="bg-[#0d1117] rounded-xl border border-slate-700 flex-1 flex flex-col overflow-hidden h-[500px] md:h-auto">
+                    <div className="bg-slate-800/80 px-4 py-2 border-b border-slate-700 flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-rose-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                      <span className="text-xs text-slate-400 font-mono ml-2">pipeline-logs.sh</span>
+                    </div>
+                    <div className="p-4 font-mono text-sm overflow-y-auto custom-scrollbar flex-1">
+                      {pipelineLogs.length === 0 ? (
+                        <div className="text-slate-600 italic">No logs yet. Build and run your pipeline!</div>
+                      ) : (
+                        <div className="space-y-2">
+                          {pipelineLogs.map((log, i) => (
+                            <div key={i} className={`
+                              ${log.includes('❌') ? 'text-rose-400' : ''}
+                              ${log.includes('✅') ? 'text-emerald-400' : ''}
+                              ${log.includes('⚠️') ? 'text-amber-400' : ''}
+                              ${log.includes('🎉') ? 'text-blue-400 font-bold mt-4' : ''}
+                              ${!log.includes('❌') && !log.includes('✅') && !log.includes('⚠️') && !log.includes('🎉') ? 'text-slate-300' : ''}
+                            `}>
+                              {log}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
