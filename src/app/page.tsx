@@ -102,7 +102,7 @@ const tracks: Track[] = [
         id: 8, slug: 'lesson-5', title: 'What is DevOps?',
         description: 'The DevOps culture, CALMS framework, and how it changes the way teams ship software.',
         difficulty: 'Beginner', duration: '~12 min', sections: 4, icon: '🔄',
-        gradient: 'from-purple-500 to-pink-500', available: false, type: 'lesson',
+        gradient: 'from-purple-500 to-pink-500', available: true, type: 'lesson',
       },
       {
         id: 9, slug: 'lesson-6', title: 'Version Control & Git',
