@@ -21,6 +21,7 @@ export default function DashboardContent() {
   const [mounted, setMounted] = useState(false);
   const [scores, setScores] = useState<QuizScore[]>([]);
   const [labsCount, setLabsCount] = useState(0);
+  const [missionsCompleted, setMissionsCompleted] = useState({ m1: false, m2: false });
   const [loading, setLoading] = useState(true);
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -51,6 +52,19 @@ export default function DashboardContent() {
         if (localStorage.getItem('labs/aws-setup-lab')) lCount++;
         if (localStorage.getItem('labs/ec2-launch-lab')) lCount++;
         setLabsCount(lCount);
+        
+        // Count missions completed
+        const savedStatuses = localStorage.getItem('cloudeng-ticket-statuses');
+        let m1Done = false;
+        let m2Done = false;
+        if (savedStatuses) {
+          try {
+            const parsed = JSON.parse(savedStatuses);
+            if (parsed['MISSION-1'] === 'done') m1Done = true;
+            if (parsed['MISSION-2'] === 'done') m2Done = true;
+          } catch { /* ignore */ }
+        }
+        setMissionsCompleted({ m1: m1Done, m2: m2Done });
         
       } catch {
         // Fallback for anonymous mode
@@ -134,6 +148,8 @@ export default function DashboardContent() {
                 <Badge title="Lab Explorer" desc="Completed first lab" icon="🧪" unlocked={labsCount > 0} />
                 <Badge title="Knowledge Seeker" desc="Completed all Module 1" icon="📚" unlocked={scores.filter(s => s.lesson_slug.includes('lesson-1') || s.lesson_slug.includes('lesson-2')).length >= 2} />
                 <Badge title="On Fire" desc="Completed 3+ quizzes" icon="🔥" unlocked={totalQuizzes >= 3} />
+                <Badge title="Pipeline Debugger" desc="Fixed the broken CI/CD pipeline mission" icon="🛠️" unlocked={missionsCompleted.m1} />
+                <Badge title="Security Guard" desc="Secured a leaky S3 bucket mission" icon="🛡️" unlocked={missionsCompleted.m2} />
                 <Badge title="Cloud Champion" desc="All content done" icon="🏆" unlocked={totalQuizzes >= 3 && labsCount >= 2} />
               </div>
             </div>

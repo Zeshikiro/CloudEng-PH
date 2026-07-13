@@ -216,6 +216,54 @@ const jiraTickets: JiraTicket[] = [
 }`,
     explanation: 'The resource type is "aws_vpc", CIDR is "10.1.0.0/16", and both DNS settings should be "true" for name resolution.',
   },
+  {
+    id: 'MISSION-1',
+    title: 'The Broken Pipeline',
+    priority: 'Critical',
+    assignee: 'DevOps Team',
+    difficulty: 'Intermediate',
+    description: 'The CI/CD pipeline is broken. Fix the syntax and logic errors in the GitHub Actions YAML file so the build can pass.',
+    context: 'From: Release Manager\n"Hey, our pipeline is failing on the Build stage. I think someone messed up the YAML indentation and the action names. Can you fix it ASAP?"',
+    starterCode: `name: CI Pipeline
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run: npm test
+    - name: Build
+    run: npm run build`,
+    expectedAnswer: `name: CI Pipeline
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Tests
+      run: npm test
+    - name: Build
+      run: npm run build`,
+    explanation: 'YAML is very strict about indentation. The "run: npm run build" line must be indented exactly below "name: Build".',
+  },
+  {
+    id: 'MISSION-2',
+    title: 'The Leaky Bucket',
+    priority: 'Critical',
+    assignee: 'Security Team',
+    difficulty: 'Advanced',
+    description: 'Write the correct AWS CLI command to block all public access to the "customer-data" S3 bucket.',
+    context: 'From: Security Officer\n"URGENT: Our customer-data bucket is public! Write the exact AWS CLI command to block all public access. Use the put-public-access-block command."',
+    starterCode: `aws s3api ___ \\
+    --bucket customer-data \\
+    --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=___,RestrictPublicBuckets=___`,
+    expectedAnswer: `aws s3api put-public-access-block \\
+    --bucket customer-data \\
+    --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true`,
+    explanation: 'The command is "put-public-access-block", and all four security flags must be set to "true" to completely lock down the bucket.',
+  }
 ];
 
 /* ================================================================== */
